@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LOGIN | SMP Negeri 35 Bandar Lampung</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="left-half"></div>
+    <div class="right-half">
+        <div class="login-container">
+            <img src="LogoSMPN35.png" alt="SMPN 35">
+            <h1>Siakad Login</h1>
+            <form id="loginForm">
+                <div class="form-group">
+                    <input type="text" id="username" name="username" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <p id="loginMessage"></p>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById("loginForm");
+        const loginMessage = document.getElementById("loginMessage");
+
+        loginForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const enteredUsername = loginForm.username.value;
+            const enteredPassword = loginForm.password.value;
+
+            // Simulated successful login for demonstration purposes
+            if (enteredUsername === "user" && enteredPassword === "password") {
+                loginMessage.innerHTML = "Login successful! Redirecting to the dashboard...";
+                setTimeout(function () {
+                    window.location.href = "dashboard.html";
+                }, 2000); // Redirect after 2 seconds
+            } else {
+                loginMessage.innerHTML = "Invalid username or password. Please try again.";
+            }
+        });
+    </script>
+</body>
+</html>
