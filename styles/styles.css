@@ -301,11 +301,11 @@ nav {
 }
 
 .kotak-isi {
-  position: fixed;
+  position: absolute;
   top: 195px; /* Tetapkan posisi vertikal */
-  right: 20px; /* Tetapkan posisi horizontal */
-  width: 1870px; /* Tetapkan lebar */
-  height: 770px; /* Tetapkan tinggi */
+  left: 425px; /* Tetapkan posisi horizontal */
+  width: 2400px; /* Tetapkan lebar */
+  height: 1080px; /* Tetapkan tinggi */
   background-color: #fff; /* Warna latar belakang */
   border-radius: 10px; /* Border radius di semua sudut kotak */
   border: 2px solid #000; /* Border hitam sekeliling kotak */
