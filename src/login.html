@@ -2,12 +2,12 @@
 <html>
   <head>
     <title>LOGIN | SMP Negeri 35 Bandar Lampung</title>
-    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
   </head>
   <body>
     <div class="left-half"></div>
     <div class="top-left">
-      <img src="LogoSMPN35.png" alt="SMPN 35" class="logo" />
+      <img src="/assets/LogoSMPN35.png" alt="SMPN 35" class="logo" />
       <h1>Sistem Informasi Akademik <br />SMP Negeri 35 Bandar Lampung</h1>
     </div>
     <div class="right-half">
@@ -57,7 +57,7 @@
           loginMessage.innerHTML =
             "Login successful! Redirecting to the dashboard...";
           setTimeout(function () {
-            window.location.href = "dashboard.html";
+            window.location.href = "dashboard-siswa.html";
           }, 2000); // Redirect after 2 seconds
         } else {
           loginMessage.innerHTML =

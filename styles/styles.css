@@ -16,7 +16,7 @@ body {
   flex: 1; /* Occupy half of the screen width */
   height: 100%; /* Full height of the screen */
   position: relative; /* Position for pseudo-element */
-  background-image: url("BackgroundSMPN35.jpg"); /* Replace with your image file's name and extension */
+  background-image: url("/assets/BackgroundSMPN35.jpg"); /* Replace with your image file's name and extension */
   background-size: cover; /* Scale the image to cover the entire div */
   background-repeat: no-repeat; /* Prevent image from repeating */
   background-position: center; /* Center the background image horizontally and vertically */
