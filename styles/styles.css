@@ -426,3 +426,103 @@ nav {
   line-height: 30px;
   color: #000;
 }
+
+/* Dashboard Guru*/
+
+.jumlah-kelas-box {
+  position: fixed;
+  top: 281px;
+  left: 546px;
+  width: 318px;
+  height: 135px;
+  background-color: #f3f3f3e8;
+  color: #000;
+  margin-right: 20px; /* Menambahkan jarak antara kotak-kelas dan kotak-nilai */
+  display: inline-block; /* Menjadikan kotak-kelas tampil berdampingan */
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 2px solid #000;
+}
+
+.jumlah-siswa-box {
+  position: fixed;
+  top: 281px;
+  left: 1010px;
+  width: 318px;
+  height: 135px;
+  background-color: #f3f3f3e8;
+  color: #000;
+  display: inline-block; /* Menjadikan kotak-nilai tampil berdampingan */
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 2px solid #000;
+}
+
+.wali-kelas-box {
+  position: fixed;
+  top: 281px;
+  left: 1474px;
+  width: 318px;
+  height: 135px;
+  background-color: #f3f3f3e8;
+  color: #000;
+  display: inline-block; /* Menjadikan kotak-nilai tampil berdampingan */
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: 2px solid #000;
+}
+
+.jumlah-kelas-box h1,
+.jumlah-siswa-box h1,
+.wali-kelas-box h1 {
+  font-family: Poppins;
+  font-size: 20px;
+  line-height: 50px;
+  margin-left: 20px;
+}
+
+.jumlah-kelas-box span,
+.jumlah-siswa-box span,
+.wali-kelas-box span {
+  font-family: Poppins;
+  font-size: 50px;
+  font-weight: 500px;
+  margin-left: 20px;
+  line-height: 10px;
+}
+
+.kotak-hijau-jumlah-kelas {
+  position: fixed;
+  top: 281px;
+  left: 475px;
+  width: 71px;
+  height: 135px;
+  background-color: #c6d8af; /* Warna hijau */
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: 2px solid #000; /* Border hitam sekeliling kotak */
+}
+
+.kotak-hijau-jumlah-siswa {
+  position: fixed;
+  top: 281px;
+  left: 939px;
+  width: 71px;
+  height: 135px;
+  background-color: #c6d8af; /* Warna hijau */
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: 2px solid #000; /* Border hitam sekeliling kotak */
+}
+
+.kotak-hijau-wali-kelas{
+  position: fixed;
+  top: 281px;
+  left: 1403px;
+  width: 71px;
+  height: 135px;
+  background-color: #c6d8af; /* Warna hijau */
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: 2px solid #000; /* Border hitam sekeliling kotak */
+}
