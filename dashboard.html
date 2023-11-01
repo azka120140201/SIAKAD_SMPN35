@@ -1,10 +1,86 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>SIAKAD | SMP Negeri 35 Bandar Lampung</title>
-</head>
-<body>
-    <h1>Welcome to the Dashboard</h1>
-    <p>This is the content of your dashboard. You're now logged in.</p>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <title>Siswa | SMP Negeri 35 Bandar Lampung</title>
+  </head>
+  <body>
+    <header>
+      <h1>SIAKAD | Siswa</h1>
+      <span>SMP Negeri 35 Bandar Lampung</span>
+      <div class="profile-button">
+        <a href="#">Alex Santoso</a>
+      </div>
+      <div class="logout-button">
+        <a href="#">Logout</a>
+      </div>
+    </header>
+
+    <nav>
+      <ul class="side-menu">
+        <li class="menu-disabled">Menu</li>
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Jadwal Pelajaran</a></li>
+        <li><a href="#">Absensi</a></li>
+        <li><a href="#">Lihat Nilai Akhir</a></li>
+        <li><a href="#">Lihat Rincian Nilai</a></li>
+        <li><a href="#" class="menu-end">Lihat Modul</a></li>
+      </ul>
+    </nav>
+
+    <div class="kotak-isi">
+      <div class="kelas-box">
+        <h1>Kelas</h1>
+        <span>8G</span>
+      </div>
+      <div class="kotak-hijau-kelas"></div>
+
+      <div class="nilai-box">
+        <h1>Nilai Rata-rata</h1>
+        <span>80,6</span>
+      </div>
+      <div class="kotak-hijau-nilai-rata-rata"></div>
+
+      <div class="data-diri">
+        <div class="column">
+          <div class="data-item">
+            <label for="nama">Nama :</label>
+            <span id="nama">Alex Santoso</span>
+          </div>
+          <div class="data-item">
+            <label for="nisn">NISN :</label>
+            <span id="nisn">1234567890</span>
+          </div>
+          <div class="data-item">
+            <label for="kelas">Kelas :</label>
+            <span id="kelas">8G</span>
+          </div>
+          <div class="data-item">
+            <label for="tempat-lahir">Tempat Lahir :</label>
+            <span id="tempat-lahir">Bandar Lampung</span>
+          </div>
+        </div>
+        <div class="column">
+          <div class="data-item">
+            <label for="tanggal-lahir">Tanggal Lahir :</label>
+            <span id="tanggal-lahir">01-01-2005</span>
+          </div>
+          <div class="data-item">
+            <label for="jenis-kelamin">Jenis Kelamin :</label>
+            <span id="jenis-kelamin">Laki-laki</span>
+          </div>
+          <div class="data-item">
+            <label for="agama">Agama :</label>
+            <span id="agama">Islam</span>
+          </div>
+          <div class="data-item">
+            <label for="nama-ibu">Nama Ibu :</label>
+            <span id="nama-ibu">Mary Jane</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
