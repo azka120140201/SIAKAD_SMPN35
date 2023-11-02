@@ -301,15 +301,19 @@ nav {
 }
 
 .kotak-isi {
-  position: absolute;
-  top: 195px; /* Tetapkan posisi vertikal */
-  left: 425px; /* Tetapkan posisi horizontal */
-  width: 2400px; /* Tetapkan lebar */
-  height: 1080px; /* Tetapkan tinggi */
-  background-color: #fff; /* Warna latar belakang */
-  border-radius: 10px; /* Border radius di semua sudut kotak */
-  border: 2px solid #000; /* Border hitam sekeliling kotak */
+  position: fixed;
+  top: 195px;
+  left: 415px;
+  right: 15px;
+  bottom: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 2px solid #000;
+  padding: 20px;
+  
 }
+
+
 
 .kelas-box {
   position: fixed;
