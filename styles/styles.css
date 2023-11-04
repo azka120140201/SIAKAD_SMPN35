@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins");
-
+/*Login page*/
 /* Apply styles to the body element for background color */
 body {
   font-family: Poppins;
@@ -132,7 +132,7 @@ button[type="submit"] {
   font-style: Medium;
   text-align: center;
   font-family: Poppins;
-  font-weight: 500;
+  font-weight: 700;
   line-height: normal;
   font-stretch: normal;
   text-decoration: none;
@@ -160,6 +160,12 @@ button[type="submit"] {
   font-style: Medium;
   line-height: normal;
 }
+
+#username:focus,
+#password:focus {
+  outline: none; /* Hilangkan outline (border) saat input mendapatkan fokus */
+}
+
 .bawah {
   align-items: flex-start;
   padding: 0;
@@ -192,6 +198,17 @@ button[type="submit"] {
   border: solid 1px black;
   border-radius: 10px;
   padding: 10px;
+}
+
+footer {
+  font-family: Poppins;
+  font-weight: 700;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  color: #000;
+  padding: 5px 10px;
+  font-size: 14px;
 }
 
 /*Dashboard Siswa*/
@@ -293,7 +310,7 @@ nav {
 }
 
 .side-menu a:hover {
-  background-color: #777;
+  background-color: #cff59f;
 }
 
 .side-menu a {
@@ -310,6 +327,10 @@ nav {
   height: 24px;
   margin-right: 10px; /* Tambahkan margin dari sisi kanan */
   margin-left: 10px; /* Tambahkan margin dari sisi kiri */
+}
+
+.side-menu .active {
+  background-color: #cff59f; /* Warna latar belakang yang berbeda untuk menu aktif */
 }
 
 .menu-disabled {
@@ -418,7 +439,7 @@ nav {
   border: 2px solid #000; /* Border hitam sekeliling kotak */
 }
 
-.data-diri::before {
+.data-diri-dashboard::before {
   font-family: Poppins;
   content: "Data Diri";
   position: absolute;
@@ -428,7 +449,7 @@ nav {
   font-size: 20px;
   font-weight: 700;
 }
-.data-diri {
+.data-diri-dashboard {
   position: fixed;
   top: 515px; /* Tetapkan posisi vertikal */
   left: 475px; /* Tetapkan posisi horizontal */
@@ -440,7 +461,7 @@ nav {
 }
 
 .column {
-  flex: 1; /* Kolom akan mengambil setengah lebar kotak data-diri */
+  flex: 1; /* Kolom akan mengambil setengah lebar kotak data-diri-dashboard */
   padding: 5px; /* Ruang di sekitar setiap item */
 }
 
@@ -562,4 +583,144 @@ nav {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   border: 2px solid #000; /* Border hitam sekeliling kotak */
+}
+
+/*Profile-Guru*/
+
+.kotak-isi-profile {
+  position: fixed;
+  top: 195px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 2px solid #000;
+  padding: 20px;
+}
+
+.data-diri-profile::before {
+  font-family: Poppins;
+  content: "Data Diri";
+  position: absolute;
+  top: -30px; /* Atur jarak atas teks dari kotak */
+  left: -5px; /* Atur jarak kiri teks dari kotak */
+  padding: 5px; /* Berikan sedikit ruang di sekitar teks */
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.data-alamat-profile::before {
+  font-family: Poppins;
+  content: "Alamat";
+  position: absolute;
+  top: -30px; /* Atur jarak atas teks dari kotak */
+  left: -5px; /* Atur jarak kiri teks dari kotak */
+  padding: 5px; /* Berikan sedikit ruang di sekitar teks */
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.data-diri-profile {
+  position: fixed;
+  top: 265px; /* Tetapkan posisi vertikal */
+  left: 450px; /* Atur posisi horizontal ke tengah */
+  width: 75vw; /* Lebar sebagai persentase dari lebar viewport */
+  height: 270px; /* Tetapkan tinggi */
+  border: 2px solid #000; /* Border hitam sekeliling kotak */
+  display: flex;
+  padding: 20px; /* Tambahkan padding sekitar kotak */
+}
+
+.data-alamat-profile {
+  position: fixed;
+  top: 605px; /* Tetapkan posisi vertikal */
+  left: 160px; /* Atur posisi horizontal ke tengah */
+  width: 85vw; /* Lebar sebagai persentase dari lebar viewport */
+  height: 300px; /* Tetapkan tinggi */
+  border: 2px solid #000; /* Border hitam sekeliling kotak */
+  display: flex;
+  padding: 20px; /* Tambahkan padding sekitar kotak */
+}
+
+.profile-picture img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#edit-button {
+  font-family: Poppins;
+  font-weight: 700;
+  position: fixed;
+  bottom: 60px;
+  right: 225px;
+  width: 70px;
+  height: 40px;
+  cursor: pointer;
+  border: none;
+  background-color: #c6d8af;
+  color: #000;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 2px solid #000;
+}
+
+#save-button {
+  font-family: Poppins;
+  font-weight: 700;
+  position: fixed;
+  bottom: 60px;
+  right: 225px;
+  width: 70px;
+  height: 40px;
+  cursor: pointer;
+  border: none;
+  background-color: #c6d8af;
+  color: #000;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 2px solid #000;
+}
+
+.data-item input {
+  font-family: Poppins;
+  border: 2px solid #000; /* Atur border input */
+  padding: 1px; /* Atur padding input */
+  width: 100%; /* Atur lebar input */
+  border-radius: 5px; /* Atur border-radius input */
+  font-size: 16px; /* Atur ukuran font input */
+}
+
+.profile-picture {
+  position: fixed;
+  top: 275px;
+  left: 155px;
+  width: 240px; /* Lebar yang ditetapkan */
+  height: 300px; /* Tinggi yang ditetapkan */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #000;
+  overflow: hidden; /* Mengatasi gambar yang terlalu besar */
+}
+
+.profile-picture img {
+  width: 100%; /* Lebar gambar diisi 100% dari kotak parent */
+  height: 100%; /* Tinggi gambar diisi 100% dari kotak parent */
+  object-fit: cover; /* Memastikan gambar diisi sesuai dengan lebar dan tinggi tanpa merubah rasio aspek */
+}
+
+.data-item input {
+  font-family: Poppins;
+  border: none;
+  padding: 1px;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 20px;
+  outline: none;
+}
+
+.data-item input:focus {
+  background-color: #f0f0f0; /* Ganti dengan warna yang Anda inginkan */
 }

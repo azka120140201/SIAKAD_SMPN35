@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
+  <title>Guru | SMP Negeri 35 Bandar Lampung</title>
+</head>
+
+<body>
+  <header>
+    <div class="logo-text">
+      <a href="dashboard-guru.html">
+        <img src="/assets/LogoSMPN35.png" alt="LogoSMPN35" />
+      </a>
+    </div>
+    <div class="title-text">
+      <a href="dashboard-guru.html">
+        <h1>SIAKAD | Guru</h1>
+        <span>SMP Negeri 35 Bandar Lampung</span>
+      </a>
+    </div>
+    <div class="profile-button">
+      <a href="profile-guru.html">Pak Gru</a>
+    </div>
+    <div class="logout-button">
+      <a href="login.html">Logout</a>
+    </div>
+  </header>
+
+  <div class="kotak-isi-profile">
+    <div class="profile-picture">
+      <img id="profile-image" src="/assets/default-profile-picture.jpg" alt="Profile Picture" />
+      <input type="file" id="edit-foto" class="edit-input-file" style="display: none" />
+
+      <div class="data-diri-profile">
+        <div class="column">
+          <div class="data-item">
+            <label for="nama">Nama :</label>
+            <span id="nama">Budi Setiawan</span>
+          </div>
+          <div class="data-item">
+            <label for="nip">NIP :</label>
+            <span id="nip">1234567890</span>
+          </div>
+          <div class="data-item">
+            <label for="tempat-lahir">Tempat Lahir :</label>
+            <span id="tempat-lahir">Bandar Lampung</span>
+          </div>
+          <div class="data-item">
+            <label for="tanggal-lahir">Tanggal Lahir :</label>
+            <span id="tanggal-lahir">01-01-2005</span>
+          </div>
+        </div>
+        <div class="column">
+          <div class="data-item">
+            <label for="jenis-kelamin">Jenis Kelamin :</label>
+            <span id="jenis-kelamin">Laki-laki</span>
+          </div>
+          <div class="data-item">
+            <label for="agama">Agama :</label>
+            <span id="agama">Islam</span>
+          </div>
+          <div class="data-item">
+            <label for="nama-ibu">Nama Ibu :</label>
+            <span id="nama-ibu">Mary Jane</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="data-alamat-profile">
+        <div class="column">
+          <div class="data-item">
+            <label for="kewarganegaraan">Kewarganegaraan :</label>
+            <span id="kewarganegaraan">Indonesia</span>
+          </div>
+          <div class="data-item">
+            <label for="provinsi">Provinsi :</label>
+            <span id="provinsi">Lampung</span>
+          </div>
+          <div class="data-item">
+            <label for="kota">Kota :</label>
+            <span id="kota">Bandar Lampung</span>
+          </div>
+          <div class="data-item">
+            <label for="kecamatan">Kecamatan :</label>
+            <span id="kecamatan">Kecamatan ABC</span>
+          </div>
+          <div class="data-item">
+            <label for="jalan">Jalan :</label>
+            <span id="jalan">Jalan ABC No. 123</span>
+          </div>
+        </div>
+        <div class="column">
+          <div class="data-item">
+            <label for="dusun">Dusun :</label>
+            <span id="dusun">Dusun XYZ</span>
+          </div>
+          <div class="data-item">
+            <label for="rt">RT :</label>
+            <span id="rt">001</span>
+          </div>
+          <div class="data-item">
+            <label for="rw">RW :</label>
+            <span id="rw">002</span>
+          </div>
+          <div class="data-item">
+            <label for="kelurahan">Kelurahan :</label>
+            <span id="kelurahan">Kelurahan ABC</span>
+          </div>
+          <div class="data-item">
+            <label for="kode-pos">Kode Pos :</label>
+            <span id="kode-pos">12345</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="edit-profile-buttons">
+        <button id="edit-button">Edit</button>
+        <button id="save-button" style="display: none;">Simpan</button>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const editButton = document.getElementById("edit-button");
+        const saveButton = document.getElementById("save-button");
+        const fileInput = document.getElementById("edit-foto");
+        const profileImage = document.getElementById("profile-image");
+        const dataItems = document.querySelectorAll(".data-item span");
+
+        editButton.addEventListener("click", function () {
+          // Tampilkan tombol unggah dan input file setelah mengklik "Edit"
+          fileInput.style.display = "block";
+
+          // Sembunyikan tombol "Edit"
+          editButton.style.display = "none";
+
+          // Tampilkan tombol "Simpan" setelah selesai mengedit
+          saveButton.style.display = "inline-block";
+
+          // Tampilkan input field yang dapat diedit
+          dataItems.forEach((item) => {
+            const input = document.createElement("input");
+            input.value = item.textContent;
+            item.textContent = "";
+            item.appendChild(input);
+          });
+        });
+
+        saveButton.addEventListener("click", function () {
+          // Simpan data yang diedit
+          dataItems.forEach((item) => {
+            const input = item.querySelector("input");
+            item.textContent = input.value;
+          });
+
+          // Sembunyikan tombol "Simpan" dan tampilkan tombol "Edit"
+          saveButton.style.display = "none";
+          editButton.style.display = "inline-block";
+
+          // Sembunyikan tombol unggah dan input file
+          fileInput.style.display = "none";
+
+          // Simpan gambar ke server Anda (implementasi server dibutuhkan)
+          const selectedFile = fileInput.files[0];
+          if (selectedFile) {
+            const formData = new FormData();
+            formData.append("profile_image", selectedFile);
+
+            // Kirim data ke server menggunakan metode seperti fetch atau XMLHttpRequest
+            // Misalnya:
+            // fetch("/upload-profile-image", {
+            //   method: "POST",
+            //   body: formData,
+            // }).then((response) => {
+            //   // Tambahkan penanganan respons di sini jika diperlukan
+            // });
+          }
+        });
+
+        fileInput.addEventListener("change", function () {
+          const selectedFile = fileInput.files[0];
+          if (selectedFile) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+              profileImage.src = e.target.result;
+            };
+
+            reader.readAsDataURL(selectedFile);
+          }
+        });
+      });
+    </script>
+
+</body>
+
+</html>
