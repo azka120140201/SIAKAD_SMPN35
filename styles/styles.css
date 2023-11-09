@@ -105,7 +105,7 @@ p {
 /* Style the username and password input boxes */
 input[type="text"],
 input[type="password"] {
-  width: 70vh;
+  width: 40vh;
   height: 7vh;
   color: gray;
   border: none;
@@ -144,10 +144,9 @@ button[type="submit"] {
   padding: 0;
   margin: 0;
   width: auto;
-  height: 15vh;
   display: flex;
   flex-direction: column;
-  width: 75vh;
+  width: 50vh;
   border-bottom: solid 1px #000;
   padding: 10px;
 }
@@ -171,11 +170,10 @@ button[type="submit"] {
   padding: 0;
   margin: 0;
   width: auto;
-  height: 15vh;
   display: flex;
   flex-direction: column;
-  width: 75vh;
-  padding-bottom: 20px;
+  width: 50vh;
+  padding: 10px;
 }
 
 .bawah2 {
@@ -189,15 +187,13 @@ button[type="submit"] {
 }
 
 .atasbawah {
-  display: flex;
   flex-direction: column;
-  width: 75vh;
-  height: 30vh;
+  width: 50vh;
+  height: 25vh;
   justify-content: center;
   align-items: center;
   border: solid 1px black;
   border-radius: 10px;
-  padding: 10px;
 }
 
 footer {
@@ -253,6 +249,10 @@ header span {
   top: 10px;
 }
 
+.title-text h1{
+  top: 40px;
+}
+
 .logout-button {
   position: fixed;
   top: 105px;
@@ -275,6 +275,7 @@ header span {
 }
 
 nav {
+  font-family: Poppins;
   position: fixed;
   top: 175px; /* Sesuaikan dengan tinggi header */
   left: 0;
@@ -378,8 +379,8 @@ nav {
   height: 135px;
   background-color: #f3f3f3e8;
   color: #000;
-  margin-right: 20px; /* Menambahkan jarak antara kotak-kelas dan kotak-nilai */
   display: inline-block; /* Menjadikan kotak-kelas tampil berdampingan */
+  padding: 10px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   border: 2px solid #000;
@@ -393,7 +394,8 @@ nav {
   height: 135px;
   background-color: #f3f3f3e8;
   color: #000;
-  display: inline-block; /* Menjadikan kotak-nilai tampil berdampingan */
+  display: inline-block; /* Menjadikan kotak-kelas tampil berdampingan */
+  padding: 10px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   border: 2px solid #000;
@@ -402,6 +404,7 @@ nav {
 .nilai-box h1 {
   font-family: Poppins;
   font-size: 20px;
+  font-weight: 700;
   line-height: 50px;
   margin-left: 20px;
 }
@@ -410,6 +413,7 @@ nav {
 .nilai-box span {
   font-family: Poppins;
   font-size: 50px;
+  font-weight: 700;
   font-weight: 500px;
   margin-left: 20px;
   line-height: 10px;
@@ -424,7 +428,9 @@ nav {
   background-color: #c6d8af; /* Warna hijau */
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-  border: 2px solid #000; /* Border hitam sekeliling kotak */
+  border-left: 2px solid #000; /* Border kiri */
+  border-top: 2px solid #000; /* Border atas */
+  border-bottom: 2px solid #000; /* Border bawah */
 }
 
 .kotak-hijau-nilai-rata-rata {
@@ -436,7 +442,9 @@ nav {
   background-color: #c6d8af; /* Warna hijau */
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-  border: 2px solid #000; /* Border hitam sekeliling kotak */
+  border-left: 2px solid #000; /* Border kiri */
+  border-top: 2px solid #000; /* Border atas */
+  border-bottom: 2px solid #000; /* Border bawah */
 }
 
 .data-diri-dashboard::before {
@@ -495,8 +503,8 @@ nav {
   height: 135px;
   background-color: #f3f3f3e8;
   color: #000;
-  margin-right: 20px; /* Menambahkan jarak antara kotak-kelas dan kotak-nilai */
   display: inline-block; /* Menjadikan kotak-kelas tampil berdampingan */
+  padding: 10px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   border: 2px solid #000;
@@ -510,7 +518,8 @@ nav {
   height: 135px;
   background-color: #f3f3f3e8;
   color: #000;
-  display: inline-block; /* Menjadikan kotak-nilai tampil berdampingan */
+  display: inline-block; /* Menjadikan kotak-kelas tampil berdampingan */
+  padding: 10px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   border: 2px solid #000;
@@ -524,7 +533,8 @@ nav {
   height: 135px;
   background-color: #f3f3f3e8;
   color: #000;
-  display: inline-block; /* Menjadikan kotak-nilai tampil berdampingan */
+  display: inline-block; /* Menjadikan kotak-kelas tampil berdampingan */
+  padding: 10px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   border: 2px solid #000;
@@ -535,6 +545,7 @@ nav {
 .wali-kelas-box h1 {
   font-family: Poppins;
   font-size: 20px;
+  font-weight: 700;
   line-height: 50px;
   margin-left: 20px;
 }
@@ -544,6 +555,7 @@ nav {
 .wali-kelas-box span {
   font-family: Poppins;
   font-size: 50px;
+  font-weight: 700;
   font-weight: 500px;
   margin-left: 20px;
   line-height: 10px;
@@ -558,7 +570,9 @@ nav {
   background-color: #c6d8af; /* Warna hijau */
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-  border: 2px solid #000; /* Border hitam sekeliling kotak */
+  border-left: 2px solid #000; /* Border kiri */
+  border-top: 2px solid #000; /* Border atas */
+  border-bottom: 2px solid #000; /* Border bawah */
 }
 
 .kotak-hijau-jumlah-siswa {
@@ -570,7 +584,9 @@ nav {
   background-color: #c6d8af; /* Warna hijau */
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-  border: 2px solid #000; /* Border hitam sekeliling kotak */
+  border-left: 2px solid #000; /* Border kiri */
+  border-top: 2px solid #000; /* Border atas */
+  border-bottom: 2px solid #000; /* Border bawah */
 }
 
 .kotak-hijau-wali-kelas {
@@ -582,7 +598,9 @@ nav {
   background-color: #c6d8af; /* Warna hijau */
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
-  border: 2px solid #000; /* Border hitam sekeliling kotak */
+  border-left: 2px solid #000; /* Border kiri */
+  border-top: 2px solid #000; /* Border atas */
+  border-bottom: 2px solid #000; /* Border bawah */
 }
 
 /*Profile-Guru*/
@@ -637,7 +655,7 @@ nav {
   top: 605px; /* Tetapkan posisi vertikal */
   left: 160px; /* Atur posisi horizontal ke tengah */
   width: 85vw; /* Lebar sebagai persentase dari lebar viewport */
-  height: 300px; /* Tetapkan tinggi */
+  height: 325px; /* Tetapkan tinggi */
   border: 2px solid #000; /* Border hitam sekeliling kotak */
   display: flex;
   padding: 20px; /* Tambahkan padding sekitar kotak */
