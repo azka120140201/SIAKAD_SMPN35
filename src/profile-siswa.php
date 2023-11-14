@@ -16,7 +16,7 @@ $data = mysqli_fetch_array($ambil_siswa);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Siswa | SMP Negeri 35 Bandar Lampung</title>
     <!-- style vanilla css -->
-    <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/styles.css" />
     <!-- iconify -->
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     <!-- bootstrap 5 -->
@@ -27,7 +27,7 @@ $data = mysqli_fetch_array($ambil_siswa);
     <header>
         <div class="logo-text">
             <a href="dashboard-siswa.php">
-                <img src="/assets/LogoSMPN35.png" alt="LogoSMPN35" width="80px" />
+                <img src="../assets/LogoSMPN35.png" alt="LogoSMPN35" width="80px" />
             </a>
         </div>
         <div class="title-text">

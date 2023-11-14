@@ -58,7 +58,7 @@ if (isset($_GET['kelas'])) {
     <title>Guru | SMP Negeri 35 Bandar Lampung</title>
     
     <!-- style vanilla css -->
-    <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/styles.css" />
     <!-- iconify -->
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     <!-- Bootstrap CSS -->
@@ -70,7 +70,7 @@ if (isset($_GET['kelas'])) {
     <header>
       <div class="logo-text">
         <a href="dashboard-guru.php">
-          <img src="/assets/LogoSMPN35.png" alt="LogoSMPN35" width="80px" />
+          <img src="../assets/LogoSMPN35.png" alt="LogoSMPN35" width="80px" />
         </a>
       </div>
       <div class="title-text">
@@ -95,43 +95,43 @@ if (isset($_GET['kelas'])) {
           <li>
             <a href="dashboard-guru.php"
               ><img
-                src="/assets/monitor-dashboard.svg"
+                src="../assets/monitor-dashboard.svg"
                 alt="Dashboard"
               />Dashboard</a
             >
           </li>
           <li>
             <a href="#"
-              ><img src="/assets/person-rays.svg" alt="Input-Absensi" />Input
+              ><img src="../assets/person-rays.svg" alt="Input-Absensi" />Input
               Absensi</a
             >
           </li>
           <li>
             <a href="lihatsiswa-guru.php" class="active"
-              ><img src="/assets/person-group.svg" alt="Lihat-Siswa" />Lihat
+              ><img src="../assets/person-group.svg" alt="Lihat-Siswa" />Lihat
               Siswa</a
             >
           </li>
           <li>
             <a href="#"
-              ><img src="/assets/transcript.svg" alt="Input-Nilai" />Input
+              ><img src="../assets/transcript.svg" alt="Input-Nilai" />Input
               Nilai</a
             >
           </li>
           <li>
             <a href="lihatnilaiakhir-guru.php"
-              ><img src="/assets/transcript.svg" alt="Lihat-Nilai-Akhir" />Lihat
+              ><img src="../assets/transcript.svg" alt="Lihat-Nilai-Akhir" />Lihat
               Nilai Akhir</a
             >
           </li>
           <li>
             <a href="#"
-              ><img src="/assets/transcript.svg" alt="List-Modul" />List Modul</a
+              ><img src="../assets/transcript.svg" alt="List-Modul" />List Modul</a
             >
           </li>
           <li>
             <a href="#" class="menu-end"
-              ><img src="/assets/transcript.svg" alt="Tambah-Modul" />Tambah
+              ><img src="../assets/transcript.svg" alt="Tambah-Modul" />Tambah
               Modul</a
             >
           </li>

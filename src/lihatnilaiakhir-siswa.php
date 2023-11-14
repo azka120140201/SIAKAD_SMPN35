@@ -45,7 +45,7 @@ function hitungMutu($nilai) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Siswa | SMP Negeri 35 Bandar Lampung</title>
     <!-- style vanilla css -->
-    <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../styles/styles.css" />
     <!-- iconify -->
     <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
     <!-- bootstrap 5 -->
@@ -56,7 +56,7 @@ function hitungMutu($nilai) {
     <header>
       <div class="logo-text">
         <a href="dashboard-siswa.php">
-          <img src="/assets/LogoSMPN35.png" alt="LogoSMPN35" width="80px"/>
+          <img src="../assets/LogoSMPN35.png" alt="LogoSMPN35" width="80px"/>
         </a>
       </div>
       <div class="title-text">
@@ -79,37 +79,37 @@ function hitungMutu($nilai) {
           <li>
             <a href="dashboard-siswa.php"
               ><img
-                src="/assets/monitor-dashboard.svg"
+                src="../assets/monitor-dashboard.svg"
                 alt="Dashboard"
               />Dashboard</a
             >
           </li>
           <li>
             <a href="jadwalpelajaran-siswa.php"
-              ><img src="/assets/schedule.svg" alt="Jadwal-Pelajaran" />Jadwal
+              ><img src="../assets/schedule.svg" alt="Jadwal-Pelajaran" />Jadwal
               Pelajaran</a
             >
           </li>
           <li>
             <a href="#"
-              ><img src="/assets/person-rays.svg" alt="Absensi" />Absensi</a
+              ><img src="../assets/person-rays.svg" alt="Absensi" />Absensi</a
             >
           </li>
           <li>
             <a href="lihatnilaiakhir-siswa.php" class="active"
-              ><img src="/assets/transcript.svg" alt="Lihat-Nilai-Akhir" />Lihat
+              ><img src="../assets/transcript.svg" alt="Lihat-Nilai-Akhir" />Lihat
               Nilai Akhir</a
             >
           </li>
           <li>
             <a href="rinciannilai-siswa.php"
-              ><img src="/assets/transcript.svg" alt="Lihat-RIncian-Nilai" />Lihat
+              ><img src="../assets/transcript.svg" alt="Lihat-RIncian-Nilai" />Lihat
               Rincian Nilai</a
             >
           </li>
           <li>
             <a href="#" class="menu-end"
-              ><img src="/assets/transcript.svg" alt="Lihat-Modul" />Lihat
+              ><img src="../assets/transcript.svg" alt="Lihat-Modul" />Lihat
               Modul</a
             >
           </li>

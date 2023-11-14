@@ -63,7 +63,7 @@ function hitungMutu($nilai) {
   <title>Guru | SMP Negeri 35 Bandar Lampung</title>
 
   <!-- style vanilla css -->
-  <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
+  <link rel="stylesheet" type="text/css" href="../styles/styles.css" />
   <!-- iconify -->
   <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
   <!-- Bootstrap CSS -->
@@ -77,7 +77,7 @@ function hitungMutu($nilai) {
   <header>
     <div class="logo-text">
       <a href="dashboard-guru.php">
-        <img src="/assets/LogoSMPN35.png" alt="LogoSMPN35" width="80px" />
+        <img src="../assets/LogoSMPN35.png" alt="LogoSMPN35" width="80px" />
       </a>
     </div>
     <div class="title-text">
@@ -100,30 +100,30 @@ function hitungMutu($nilai) {
     <ul class="side-menu">
       <li class="menu-disabled"><span>Menu</span></li>
       <li>
-        <a href="dashboard-guru.php"><img src="/assets/monitor-dashboard.svg" alt="Dashboard" />Dashboard</a>
+        <a href="dashboard-guru.php"><img src="../assets/monitor-dashboard.svg" alt="Dashboard" />Dashboard</a>
       </li>
       <li>
-        <a href="#"><img src="/assets/person-rays.svg" alt="Input-Absensi" />Input
+        <a href="#"><img src="../assets/person-rays.svg" alt="Input-Absensi" />Input
           Absensi</a>
       </li>
       <li>
-        <a href="lihatsiswa-guru.php"><img src="/assets/person-group.svg" alt="Lihat-Siswa" />Lihat
+        <a href="lihatsiswa-guru.php"><img src="../assets/person-group.svg" alt="Lihat-Siswa" />Lihat
           Siswa</a>
       </li>
       <li>
-        <a href="#"><img src="/assets/transcript.svg" alt="Input-Nilai" />Input
+        <a href="#"><img src="../assets/transcript.svg" alt="Input-Nilai" />Input
           Nilai</a>
       </li>
       <li>
-        <a href="lihatnilaiakhir-guru.php" class="active"><img src="/assets/transcript.svg"
+        <a href="lihatnilaiakhir-guru.php" class="active"><img src="../assets/transcript.svg"
             alt="Lihat-Nilai-Akhir" />Lihat
           Nilai Akhir</a>
       </li>
       <li>
-        <a href="#"><img src="/assets/transcript.svg" alt="List-Modul" />List Modul</a>
+        <a href="#"><img src="../assets/transcript.svg" alt="List-Modul" />List Modul</a>
       </li>
       <li>
-        <a href="#" class="menu-end"><img src="/assets/transcript.svg" alt="Tambah-Modul" />Tambah
+        <a href="#" class="menu-end"><img src="../assets/transcript.svg" alt="Tambah-Modul" />Tambah
           Modul</a>
       </li>
     </ul>

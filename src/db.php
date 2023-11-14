@@ -1,7 +1,7 @@
 <?php
 $hostname = 'localhost';
-$username = 'fkftaskm_skd35';
-$password = 'fkftaskm_skd35';
+$username = 'root';
+$password = '';
 $database = 'fkftaskm_skd35';
 
 $conn = mysqli_connect($hostname, $username, $password, $database);

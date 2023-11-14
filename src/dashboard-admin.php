@@ -12,7 +12,7 @@
   <header>
     <div class="logo-text">
       <a href="dashboard-admin.html">
-        <img src="/assets/LogoSMPN35.png" alt="LogoSMPN35" />
+        <img src="../assets/LogoSMPN35.png" alt="LogoSMPN35" />
       </a>
     </div>
     <div class="title-text">
@@ -33,18 +33,18 @@
     <ul class="side-menu">
       <li class="menu-disabled"><span>Menu</span></li>
       <li>
-        <a href="#"><img src="/assets/transcript.svg" alt="Daftar-Guru" />Daftar
+        <a href="#"><img src="../assets/transcript.svg" alt="Daftar-Guru" />Daftar
           Guru</a>
       </li>
       <li>
-        <a href="#"><img src="/assets/transcript.svg" alt="Daftar-Siswa" />Daftar
+        <a href="#"><img src="../assets/transcript.svg" alt="Daftar-Siswa" />Daftar
           Siswa</a>
       </li>
       <li>
-        <a href="#"><img src="/assets/transcript.svg" alt="Edit-Nilai" />Edit Nilai</a>
+        <a href="#"><img src="../assets/transcript.svg" alt="Edit-Nilai" />Edit Nilai</a>
       </li>
       <li>
-        <a href="#" class="menu-end"><img src="/assets/transcript.svg" alt="Edit-Modul" />Edit Modul</a>
+        <a href="#" class="menu-end"><img src="../assets/transcript.svg" alt="Edit-Modul" />Edit Modul</a>
       </li>
     </ul>
   </nav>
