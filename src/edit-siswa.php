@@ -62,7 +62,7 @@ $data = mysqli_fetch_array($ambil_siswa);
                     </div>
                     <div class="form-group">
                         <label for="nisn">NISN :</label>
-                        <input type="text" name="nisn" value="<?php echo $data['nisn'] ?>" />
+                        <input type="text" name="nisn" value="<?php echo $data['nisn'] ?>" readonly/>
                     </div>
                     <div class="form-group">
                         <label for="kelas">Kelas :</label>
@@ -92,8 +92,11 @@ $data = mysqli_fetch_array($ambil_siswa);
                         <input type="text" name="tanggal_lahir" value="<?php echo $data['tanggal_lahir'] ?>" />
                     </div>
                     <div class="form-group">
-                        <label for="jenis-kelamin">Jenis Kelamin :</label>
-                        <input type="text" name="jenis_kelamin" value="<?php echo $data['jenis_kelamin'] ?>" />
+                    <label for="jenis-kelamin">Jenis Kelamin :</label>
+                        <select name="jenis_kelamin" id="jenis-kelamin">
+                            <option value="Laki-Laki" <?php if($data['jenis_kelamin'] == 'Laki-Laki') echo 'selected'; ?>>Laki-Laki</option>
+                            <option value="Perempuan" <?php if($data['jenis_kelamin'] == 'Perempuan') echo 'selected'; ?>>Perempuan</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="agama">Agama :</label>

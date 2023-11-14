@@ -850,6 +850,15 @@ nav {
   border: 1px solid #ccc;
 }
 
+/* Style for dropdown */
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  background-color: #c6d8af;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
 /* Style for submit button */
 .form-group input[type="submit"] {
   width: 100%;
@@ -864,3 +873,4 @@ nav {
 .form-group input[type="submit"]:hover {
   background-color: #45a049;
 }
+
