@@ -111,11 +111,11 @@ function hitungMutu($nilai) {
           Siswa</a>
       </li>
       <li>
-        <a href="inputnilai-guru.php"><img src="../assets/transcript.svg" alt="Input-Nilai" />Input
+        <a href="inputnilai-guru.php" class="active"><img src="../assets/transcript.svg" alt="Input-Nilai" />Input
           Nilai</a>
       </li>
       <li>
-        <a href="lihatnilaiakhir-guru.php" class="active"><img src="../assets/transcript.svg"
+        <a href="lihatnilaiakhir-guru.php"><img src="../assets/transcript.svg"
             alt="Lihat-Nilai-Akhir" />Lihat
           Nilai Akhir</a>
       </li>
@@ -140,7 +140,7 @@ function hitungMutu($nilai) {
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
           <?php foreach ($kelas_guru as $kode_kelas): ?>
-              <li><a class="dropdown-item" href="lihatnilaiakhir-guru.php?kelas=<?php echo $kode_kelas; ?>"><?php echo $kode_kelas; ?></a></li>
+              <li><a class="dropdown-item" href="inputnilai-guru.php?kelas=<?php echo $kode_kelas; ?>"><?php echo $kode_kelas; ?></a></li>
           <?php endforeach; ?>
       </ul>
   </div>
@@ -159,6 +159,7 @@ function hitungMutu($nilai) {
             <th scope="col">Nilai UAS</th>
             <th scope="col">Nilai Akhir</th>
             <th scope="col">Nilai Mutu</th>
+            <th scope="col">Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -171,6 +172,7 @@ function hitungMutu($nilai) {
                       <td><?php echo htmlspecialchars($nilai['uas']); ?></td>
                       <td><?php echo htmlspecialchars($nilai['nilai_akhir']); ?></td>
                       <td><?php echo htmlspecialchars($nilai['nilai_mutu']); ?></td>
+                      <td> <a href="inputnilai.php?nisn=<?php echo $nilai['nisn']; ?>"><img src="../assets/edit.svg" alt="edit-button"></a></td>
                   </tr>
               <?php endforeach; ?>
           </tbody>

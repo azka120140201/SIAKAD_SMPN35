@@ -113,7 +113,7 @@ if (isset($_GET['kelas'])) {
             >
           </li>
           <li>
-            <a href="#"
+            <a href="inputnilai-guru.php"
               ><img src="../assets/transcript.svg" alt="Input-Nilai" />Input
               Nilai</a
             >

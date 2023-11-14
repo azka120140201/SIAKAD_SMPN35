@@ -84,6 +84,7 @@ $data = mysqli_fetch_array($ambil_guru);
                         <input type="text" name="tanggal_lahir" value="<?php echo $data['tanggal_lahir'] ?>" />
                     </div>
                     <div class="form-group">
+                    <label for="jenis-kelamin">Jenis Kelamin :</label>
                     <select name="jenis_kelamin" id="jenis-kelamin">
                             <option value="Laki-Laki" <?php if($data['jenis_kelamin'] == 'Laki-Laki') echo 'selected'; ?>>Laki-Laki</option>
                             <option value="Perempuan" <?php if($data['jenis_kelamin'] == 'Perempuan') echo 'selected'; ?>>Perempuan</option>

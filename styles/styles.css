@@ -874,3 +874,19 @@ nav {
   background-color: #45a049;
 }
 
+/* Style for the form */
+.form-inputnilai {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.form-group input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #c6d8af;
+}
