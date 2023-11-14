@@ -249,7 +249,7 @@ header span {
   top: 10px;
 }
 
-.title-text h1{
+.title-text h1 {
   top: 40px;
 }
 
@@ -741,4 +741,19 @@ nav {
 
 .data-item input:focus {
   background-color: #f0f0f0; /* Ganti dengan warna yang Anda inginkan */
+}
+
+/*Input Nilai Guru*/
+.edit-nilai {
+  width: 5vh;
+  border-radius: 5px;
+  background-color: #8279f1;
+}
+.save-nilai {
+  position: absolute;
+  width: 5vh;
+  border-radius: 5px;
+  background-color: #cff59f;
+  bottom: 50px;
+  right: 360px;
 }

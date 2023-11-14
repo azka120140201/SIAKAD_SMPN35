@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Guru | SMP Negeri 35 Bandar Lampung</title>
@@ -18,7 +17,6 @@
       crossorigin="anonymous"
     />
   </head>
-
   <body>
     <!-- topbar -->
     <header>
@@ -81,19 +79,19 @@
           >
         </li>
         <li>
-          <a href="inputnilai-guru.html"
+          <a href="inputnilai-guru.html" class="active"
             ><img src="/assets/transcript.svg" alt="Input-Nilai" />Input
             Nilai</a
           >
         </li>
         <li>
-          <a href="lihatnilaiakhir-guru.html" class="active"
+          <a href="lihatnilaiakhir-guru.html"
             ><img src="/assets/transcript.svg" alt="Lihat-Nilai-Akhir" />Lihat
             Nilai Akhir</a
           >
         </li>
         <li>
-          <a href="listmodul-guru.html"
+            <a href="listmodul-guru.html"
             ><img src="/assets/transcript.svg" alt="List-Modul" />List Modul</a
           >
         </li>
@@ -107,7 +105,7 @@
     </nav>
     <!-- /sidebar -->
 
-    <!-- Content -->
+    <!-- content -->
     <div class="kotak-isi">
       <!-- button pilih kelas -->
       <div class="dropdown container mb-3">
@@ -141,95 +139,106 @@
               <th scope="col">Nilai Tugas</th>
               <th scope="col">Nilai UTS</th>
               <th scope="col">Nilai UAS</th>
-              <th scope="col">Nilai Akhir</th>
-              <th scope="col">Nilai Mutu</th>
+              <th scope="col">Aksi</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td scope="row">Ahmad</td>
-              <td>12</td>
-              <td>23</td>
-              <td>34</td>
-              <td>45</td>
-              <td>A</td>
+              <td contenteditable="false">Kolom 1</td>
+              <td contenteditable="true">Kolom 2</td>
+              <td contenteditable="true">Kolom 3</td>
+              <td contenteditable="true">Kolom 4</td>
+              <td>
+                <button class="edit-nilai" onclick="editRow(this)">
+                  <img src="/assets/edit.svg" alt="edit" />
+                </button>
+              </td>
             </tr>
             <tr>
-              <td scope="row">Ahmad</td>
-              <td>12</td>
-              <td>23</td>
-              <td>34</td>
-              <td>45</td>
-              <td>B</td>
+              <td contenteditable="false">Kolom 1</td>
+              <td contenteditable="true">Kolom 2</td>
+              <td contenteditable="true">Kolom 3</td>
+              <td contenteditable="true">Kolom 4</td>
+              <td>
+                <button class="edit-nilai" onclick="editRow(this)">
+                  <img src="/assets/edit.svg" alt="edit" />
+                </button>
+              </td>
             </tr>
-            <tr>
-              <td scope="row">Ahmad</td>
-              <td>12</td>
-              <td>23</td>
-              <td>34</td>
-              <td>45</td>
-              <td>C</td>
-            </tr>
-            <tr>
-              <td scope="row">Ahmad</td>
-              <td>12</td>
-              <td>23</td>
-              <td>34</td>
-              <td>45</td>
-              <td>A</td>
-            </tr>
-            <tr>
-              <td scope="row">Ahmad</td>
-              <td>12</td>
-              <td>23</td>
-              <td>34</td>
-              <td>45</td>
-              <td>B</td>
-            </tr>
-            <tr>
-              <td scope="row">Ahmad</td>
-              <td>12</td>
-              <td>23</td>
-              <td>34</td>
-              <td>45</td>
-              <td>C</td>
-            </tr>
-            <tr>
-              <td scope="row">Ahmad</td>
-              <td>12</td>
-              <td>23</td>
-              <td>34</td>
-              <td>45</td>
-              <td>A</td>
-            </tr>
-            <tr>
-              <td scope="row">Ahmad</td>
-              <td>12</td>
-              <td>23</td>
-              <td>34</td>
-              <td>45</td>
-              <td>B</td>
-            </tr>
-            <tr>
-              <td scope="row">Ahmad</td>
-              <td>12</td>
-              <td>23</td>
-              <td>34</td>
-              <td>45</td>
-              <td>C</td>
-            </tr>
+            <!-- Tambahkan baris lainnya sesuai kebutuhan -->
           </tbody>
         </table>
+        <button class="save-nilai" onclick="saveRows()" style="display: none">
+          <img src="/assets/save-line.svg" alt="save" />
+        </button>
       </div>
-      <!-- /table -->
-    </div>
-    <!-- /Content -->
 
-    <!-- script -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
+      <!-- script -->
+      <script>
+        let originalData = {};
+
+        function editRow(button) {
+          const row = button.parentNode.parentNode;
+          const cells = row.getElementsByTagName("td");
+
+          // Jika belum ada data asli untuk baris ini, simpan data asli
+          if (!originalData[row.rowIndex]) {
+            originalData[row.rowIndex] = {
+              nilaiTugas: cells[1].textContent,
+              nilaiUTS: cells[2].textContent,
+              nilaiUAS: cells[3].textContent,
+            };
+          }
+
+          // Aktifkan mode edit untuk kolom nilai
+          for (let i = 1; i <= 3; i++) {
+            cells[i].contentEditable = true;
+          }
+
+          // Tampilkan tombol Simpan, sembunyikan tombol Edit
+          row.querySelector(".edit-nilai").style.visibility = "hidden";
+          document.querySelector(".save-nilai").style.display = "block";
+        }
+
+        function saveRows() {
+          const rows = document.querySelector("table tbody").rows;
+
+          // Simpan semua perubahan
+          for (let rowIndex in originalData) {
+            const row = rows[rowIndex - 1];
+            const cells = row.getElementsByTagName("td");
+
+            // Lakukan penyimpanan atau pengolahan data yang diperlukan
+            // Di sini Anda dapat mengirim data ke server atau melakukan tindakan lain sesuai kebutuhan
+
+            // Contoh: Tampilkan data yang diubah di konsol
+            console.log("Data yang diubah (baris ke-" + row.rowIndex + "):");
+            console.log("Nilai Tugas:", cells[1].textContent);
+            console.log("Nilai UTS:", cells[2].textContent);
+            console.log("Nilai UAS:", cells[3].textContent);
+          }
+
+          // Bersihkan data asli
+          originalData = {};
+
+          // Nonaktifkan mode edit dan tampilkan tombol Edit
+          for (let i = 0; i < rows.length; i++) {
+            const cells = rows[i].getElementsByTagName("td");
+            for (let j = 1; j <= 3; j++) {
+              cells[j].contentEditable = false;
+            }
+            rows[i].querySelector(".edit-nilai").style.visibility = "visible";
+          }
+
+          // Sembunyikan tombol Simpan
+          document.querySelector(".save-nilai").style.display = "none";
+        }
+      </script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"
+      ></script>
+    </div>
   </body>
 </html>
