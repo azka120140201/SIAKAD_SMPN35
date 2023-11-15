@@ -110,7 +110,7 @@ $angkatan_max_length = 5;
                     <div class="form-group">
                         <label for="agama">Agama :</label>
                         <select name="agama" id="agama">
-                            <option value="Islam" <?php if($data['islam'] == 'Islam') echo 'selected'; ?>>Islam</option>
+                            <option value="Islam" <?php if($data['agama'] == 'Islam') echo 'selected'; ?>>Islam</option>
                             <option value="Kristen" <?php if($data['agama'] == 'Kristen') echo 'selected'; ?>>Kristen</option>
                             <option value="Katholik" <?php if($data['agama'] == 'Katholik') echo 'selected'; ?>>Katholik</option>
                             <option value="Hindu" <?php if($data['agama'] == 'Hindu') echo 'selected'; ?>>Hindu</option>
