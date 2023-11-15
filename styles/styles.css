@@ -890,3 +890,19 @@ nav {
   border: 1px solid #ccc;
   background-color: #c6d8af;
 }
+
+.form-edit-modul {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin-left: 20px; /* Adjust the margin as needed */
+  padding: 20px;
+  border-radius: 8px;
+  background-color: white;
+}
+
+.text-end select{
+  background-color: #c6d8af;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
