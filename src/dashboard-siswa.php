@@ -80,7 +80,7 @@ $nilai_rata_rata = number_format($data_nilai_rata['nilai_rata_rata'], 2);
                     Rincian Nilai</a>
             </li>
             <li>
-                <a href="#" class="menu-end"><img src="../assets/transcript.svg" alt="Lihat-Modul" />Lihat
+                <a href="lihatmodul-siswa.php" class="menu-end"><img src="../assets/transcript.svg" alt="Lihat-Modul" />Lihat
                     Modul</a>
             </li>
         </ul>

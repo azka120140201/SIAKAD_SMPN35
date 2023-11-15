@@ -96,7 +96,7 @@ function hitungMutu($nilai)
           Pelajaran</a>
       </li>
       <li>
-        <a href="#"><img src="../assets/person-rays.svg" alt="Absensi" />Absensi</a>
+        <a href="lihatabsensi-siswa.php"><img src="../assets/person-rays.svg" alt="Absensi" />Absensi</a>
       </li>
       <li>
         <a href="lihatnilaiakhir-siswa.php" class="active"><img src="../assets/transcript.svg"
@@ -108,7 +108,7 @@ function hitungMutu($nilai)
           Rincian Nilai</a>
       </li>
       <li>
-        <a href="#" class="menu-end"><img src="../assets/transcript.svg" alt="Lihat-Modul" />Lihat
+        <a href="lihatmodul-siswa.php" class="menu-end"><img src="../assets/transcript.svg" alt="Lihat-Modul" />Lihat
           Modul</a>
       </li>
     </ul>

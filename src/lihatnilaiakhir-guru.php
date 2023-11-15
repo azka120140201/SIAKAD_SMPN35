@@ -103,7 +103,7 @@ function hitungMutu($nilai) {
         <a href="dashboard-guru.php"><img src="../assets/monitor-dashboard.svg" alt="Dashboard" />Dashboard</a>
       </li>
       <li>
-        <a href="#"><img src="../assets/person-rays.svg" alt="Input-Absensi" />Input
+        <a href="inputabsensi-guru.php"><img src="../assets/person-rays.svg" alt="Input-Absensi" />Input
           Absensi</a>
       </li>
       <li>
@@ -120,10 +120,10 @@ function hitungMutu($nilai) {
           Nilai Akhir</a>
       </li>
       <li>
-        <a href="#"><img src="../assets/transcript.svg" alt="List-Modul" />List Modul</a>
+        <a href="listmodul-guru.php"><img src="../assets/transcript.svg" alt="List-Modul" />List Modul</a>
       </li>
       <li>
-        <a href="#" class="menu-end"><img src="../assets/transcript.svg" alt="Tambah-Modul" />Tambah
+        <a href="tambahmodul-guru.php" class="menu-end"><img src="../assets/transcript.svg" alt="Tambah-Modul" />Tambah
           Modul</a>
       </li>
     </ul>

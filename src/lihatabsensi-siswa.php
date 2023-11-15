@@ -71,7 +71,7 @@ $nilai_rata_rata = number_format($data_nilai_rata['nilai_rata_rata'], 2);
                     Pelajaran</a>
             </li>
             <li>
-                <a href="#" class="active"><img src="../assets/person-rays.svg" alt="Absensi" />Absensi</a>
+                <a href="lihatabsensi-siswa.php" class="active"><img src="../assets/person-rays.svg" alt="Absensi" />Absensi</a>
             </li>
             <li>
                 <a href="lihatnilaiakhir-siswa.php"><img src="../assets/transcript.svg" alt="Lihat-Nilai-Akhir" />Lihat
@@ -82,7 +82,7 @@ $nilai_rata_rata = number_format($data_nilai_rata['nilai_rata_rata'], 2);
                     Rincian Nilai</a>
             </li>
             <li>
-                <a href="#" class="menu-end"><img src="../assets/transcript.svg" alt="Lihat-Modul" />Lihat
+                <a href="lihatmodul-siswa.php" class="menu-end"><img src="../assets/transcript.svg" alt="Lihat-Modul" />Lihat
                     Modul</a>
             </li>
         </ul>

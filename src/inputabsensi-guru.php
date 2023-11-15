@@ -93,10 +93,10 @@ $jumlah_siswa = $data_jumlah_siswa['jumlah_siswa'];
                     Nilai Akhir</a>
             </li>
             <li>
-                <a href="#"><img src="../assets/transcript.svg" alt="List-Modul" />List Modul</a>
+                <a href="listmodul-guru.php"><img src="../assets/transcript.svg" alt="List-Modul" />List Modul</a>
             </li>
             <li>
-                <a href="#" class="menu-end"><img src="../assets/transcript.svg" alt="Tambah-Modul" />Tambah
+                <a href="tambahmodul-guru.php" class="menu-end"><img src="../assets/transcript.svg" alt="Tambah-Modul" />Tambah
                     Modul</a>
             </li>
         </ul>

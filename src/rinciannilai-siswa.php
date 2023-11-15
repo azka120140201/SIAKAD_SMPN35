@@ -79,7 +79,7 @@ while ($row = mysqli_fetch_assoc($hasil_nilai)) {
             >
           </li>
           <li>
-            <a href="#"
+            <a href="lihatabsensi-siswa.php"
               ><img src="../assets/person-rays.svg" alt="Absensi" />Absensi</a
             >
           </li>
@@ -96,7 +96,7 @@ while ($row = mysqli_fetch_assoc($hasil_nilai)) {
             >
           </li>
           <li>
-            <a href="#" class="menu-end"
+            <a href="lihatmodul-siswa.php" class="menu-end"
               ><img src="../assets/transcript.svg" alt="Lihat-Modul" />Lihat
               Modul</a
             >

@@ -17,12 +17,12 @@
 <body>
     <header>
         <div class="logo-text">
-            <a href="#">
+            <a href="dashboard-admin.php">
                 <img src="../assets/LogoSMPN35.png" alt="LogoSMPN35" width="80px" />
             </a>
         </div>
         <div class="title-text">
-            <a href="#">
+            <a href="dashboard-admin.php">
                 <h1>SIAKAD | Admin</h1>
                 <span>SMP Negeri 35 Bandar Lampung</span>
             </a>

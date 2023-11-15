@@ -101,7 +101,7 @@ if (isset($_GET['kelas'])) {
             >
           </li>
           <li>
-            <a href="#"
+            <a href="inputabsensi-guru.php"
               ><img src="../assets/person-rays.svg" alt="Input-Absensi" />Input
               Absensi</a
             >
@@ -125,12 +125,12 @@ if (isset($_GET['kelas'])) {
             >
           </li>
           <li>
-            <a href="#"
+            <a href="listmodul-guru.php"
               ><img src="../assets/transcript.svg" alt="List-Modul" />List Modul</a
             >
           </li>
           <li>
-            <a href="#" class="menu-end"
+            <a href="tambahmodul-guru.php" class="menu-end"
               ><img src="../assets/transcript.svg" alt="Tambah-Modul" />Tambah
               Modul</a
             >

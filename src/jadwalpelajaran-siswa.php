@@ -87,7 +87,7 @@ foreach ($jadwal_pelajaran as $hari => $mapels) {
             >
           </li>
           <li>
-            <a href="#"
+            <a href="jadwalpelajaran-siswa.php"
               ><img src="../assets/person-rays.svg" alt="Absensi" />Absensi</a
             >
           </li>
@@ -104,7 +104,7 @@ foreach ($jadwal_pelajaran as $hari => $mapels) {
             >
           </li>
           <li>
-            <a href="#" class="menu-end"
+            <a href="lihatmodul-siswa.php" class="menu-end"
               ><img src="../assets/transcript.svg" alt="Lihat-Modul" />Lihat
               Modul</a
             >
