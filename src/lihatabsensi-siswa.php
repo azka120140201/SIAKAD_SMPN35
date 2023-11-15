@@ -2,7 +2,7 @@
 session_start();
 require('db.php');
 if (!isset($_SESSION["siswa"])) {
-  echo "<script>location='login.php'</script>";
+    echo "<script>location='login.php'</script>";
 }
 $siswa = $_SESSION["siswa"]["nisn"];
 $ambil_siswa = mysqli_query($conn, "SELECT * FROM siswa WHERE nisn = $siswa");
@@ -33,6 +33,7 @@ $nilai_rata_rata = number_format($data_nilai_rata['nilai_rata_rata'], 2);
 </head>
 
 <body>
+    <!-- topbar -->
     <header>
         <div class="logo-text">
             <a href="dashboard-siswa.php">
@@ -56,20 +57,21 @@ $nilai_rata_rata = number_format($data_nilai_rata['nilai_rata_rata'], 2);
                     class="align-middle p-3"></iconify-icon>Logout</a>
         </div>
     </header>
+    <!-- /Topbar -->
 
+    <!-- sidebar -->
     <nav>
         <ul class="side-menu">
             <li class="menu-disabled"><span>Menu</span></li>
             <li>
-                <a href="dashboard-siswa.php" class="active"><img src="../assets/monitor-dashboard.svg"
-                        alt="Dashboard" />Dashboard</a>
+                <a href="dashboard-siswa.php"><img src="../assets/monitor-dashboard.svg" alt="Dashboard" />Dashboard</a>
             </li>
             <li>
                 <a href="jadwalpelajaran-siswa.php"><img src="../assets/schedule.svg" alt="Jadwal-Pelajaran" />Jadwal
                     Pelajaran</a>
             </li>
             <li>
-                <a href="lihatabsensi-siswa.php"><img src="../assets/person-rays.svg" alt="Absensi" />Absensi</a>
+                <a href="#" class="active"><img src="../assets/person-rays.svg" alt="Absensi" />Absensi</a>
             </li>
             <li>
                 <a href="lihatnilaiakhir-siswa.php"><img src="../assets/transcript.svg" alt="Lihat-Nilai-Akhir" />Lihat
@@ -85,83 +87,72 @@ $nilai_rata_rata = number_format($data_nilai_rata['nilai_rata_rata'], 2);
             </li>
         </ul>
     </nav>
+    <!-- /sidebar -->
 
+    <!-- container -->
     <div class="kotak-isi">
-        <div class="kelas-box">
-            <h1>Kelas</h1>
-            <span>
-                <?php echo $data['kode_kelas'] ?>
-            </span>
-        </div>
-        <div class="kotak-hijau-kelas"></div>
-
-        <div class="nilai-box">
-            <h1>Nilai Rata-rata</h1>
-            <span>
-                <?php echo $nilai_rata_rata; ?>
-            </span>
-        </div>
-        <div class="kotak-hijau-nilai-rata-rata"></div>
-
-        <div class="data-diri-dashboard">
-            <div class="column">
-                <div class="data-item">
-                    <label for="nama">Nama :</label>
-                    <span id="nama">
-                        <?php echo $data['nama'] ?>
-                    </span>
-                </div>
-                <div class="data-item">
-                    <label for="nisn">NISN :</label>
-                    <span id="nisn">
-                        <?php echo $data['nisn'] ?>
-                    </span>
-                </div>
-                <div class="data-item">
-                    <label for="kelas">Kelas :</label>
-                    <span id="kelas">
-                        <?php echo $data['kode_kelas'] ?>
-                    </span>
-                </div>
-                <div class="data-item">
-                    <label for="tempat-lahir">Tempat Lahir :</label>
-                    <span id="tempat-lahir">
-                        <?php echo $data['tempat_lahir'] ?>
-                    </span>
-                </div>
+        <!-- dropdown mapel -->
+        <div class="dropdown container ml-3 mb-3">
+                <button class="btn border-dark dropdown-toggle" style="background-color: #C6D8AF;" type="button"
+                    id="mapel" data-bs-toggle="dropdown" aria-expanded="false">
+                    Mata Pelajaran
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="mapel">
+                    <li class="dropdown-item" href="#">mapel 1</li>
+                    <li class="dropdown-item" href="#">mapel 2</li>
+                    <li class="dropdown-item" href="#">mapel 3</li>
+                </ul>
             </div>
-            <div class="column">
-                <div class="data-item">
-                    <label for="tanggal-lahir">Tanggal Lahir :</label>
-                    <span id="tanggal-lahir">
-                        <?php echo $data['tanggal_lahir'] ?>
-                    </span>
-                </div>
-                <div class="data-item">
-                    <label for="jenis-kelamin">Jenis Kelamin :</label>
-                    <span id="jenis-kelamin">
-                        <?php echo $data['jenis_kelamin'] ?>
-                    </span>
-                </div>
-                <div class="data-item">
-                    <label for="agama">Agama :</label>
-                    <span id="agama">
-                        <?php echo $data['agama'] ?>
-                    </span>
-                </div>
-                <div class="data-item">
-                    <label for="nama-ibu">Nama Wali Murid :</label>
-                    <span id="nama-ibu">
-                        <?php echo $data['nama_wali'] ?>
-                    </span>
-                </div>
-            </div>
+        <!-- /dropdown mapel -->
+
+        <!-- Table -->
+        <div class="container">
+            <table class="table table-striped table-fixed text-center">
+                <thead style="background-color: #C6D8AF;">
+                    <tr>
+                        <th scope="col">Pertemuan</th>
+                        <th scope="col">Keterangan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <td>Pertemuan 1</td>
+                            <td>Hadir</td>
+                        </tr>
+                        <tr>
+                            <td>Pertemuan 2</td>
+                            <td>Hadir</td>
+                        </tr>
+                        <tr>
+                            <td>Pertemuan 3</td>
+                            <td>Hadir</td>
+                        </tr>
+                        <tr>
+                            <td>Pertemuan 4</td>
+                            <td>Hadir</td>
+                        </tr>
+                        <tr>
+                            <td>Pertemuan 5</td>
+                            <td>Hadir</td>
+                        </tr>
+                        <tr>
+                            <td>Pertemuan 6</td>
+                            <td>Hadir</td>
+                        </tr>
+                        <tr>
+                            <td>Pertemuan 7</td>
+                            <td>Hadir</td>
+                        </tr>
+                        <tr>
+                            <td>Pertemuan 8</td>
+                            <td>Hadir</td>
+                        </tr>
+                </tbody>
+            </table>
         </div>
+        <!-- /table -->
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    <!-- /container -->
 </body>
 
 </html>

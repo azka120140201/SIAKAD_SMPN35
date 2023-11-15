@@ -2,7 +2,7 @@
 $hostname = 'localhost';
 $username = 'root';
 $password = '';
-$database = 'fkftaskm_skd35';
+$database = 'siakad';
 
 $conn = mysqli_connect($hostname, $username, $password, $database);
 if (!$conn) {

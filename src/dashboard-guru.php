@@ -72,7 +72,7 @@ $jumlah_siswa = $data_jumlah_siswa['jumlah_siswa'];
           >
         </li>
         <li>
-          <a href="#"
+          <a href="inputabsensi-guru.php"
             ><img src="../assets/person-rays.svg" alt="Input-Absensi" />Input
             Absensi</a
           >
