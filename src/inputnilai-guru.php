@@ -27,7 +27,7 @@ if (isset($_GET['kelas'])) {
 
     // Query yang dimodifikasi untuk mengambil nilai siswa dari kelas yang dipilih
     // dan hanya untuk mata pelajaran yang diampu oleh guru tersebut
-    $query_nilai = "SELECT s.nama, n.nisn, n.ph1, n.ph2, n.uts, n.uas
+    $query_nilai = "SELECT s.nama, n.kode_mapel_guru, n.nisn, n.ph1, n.ph2, n.uts, n.uas
                     FROM siswa s
                     JOIN nilai n ON s.nisn = n.nisn
                     JOIN jadwal_pelajaran jp ON n.kode_mapel = jp.kode_mapel AND s.kode_kelas = jp.kode_kelas
@@ -172,9 +172,9 @@ function hitungMutu($nilai) {
                       <td><?php echo htmlspecialchars($nilai['uas']); ?></td>
                       <td><?php echo htmlspecialchars($nilai['nilai_akhir']); ?></td>
                       <td><?php echo htmlspecialchars($nilai['nilai_mutu']); ?></td>
-                      <td> <a href="inputnilai.php?nisn=<?php echo $nilai['nisn']; ?>"><img src="../assets/edit.svg" alt="edit-button"></a></td>
-                  </tr>
-              <?php endforeach; ?>
+                      <td> <a href="inputnilai.php?nisn=<?php echo $nilai['nisn']; ?>&kode_mapel_guru=<?php echo $nilai['kode_mapel_guru']; ?>"><img src="../assets/edit.svg" alt="edit-button"></a></td>
+    </tr>
+<?php endforeach; ?>
           </tbody>
       </table>
   </div>

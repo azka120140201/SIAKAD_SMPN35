@@ -5,22 +5,28 @@ if (!isset($_SESSION["guru"])) {
     echo "<script>location='login.php'</script>";
 }
 $guru = $_SESSION["guru"]["nip"];
-$ambil_guru = mysqli_query($conn, "SELECT * FROM guru WHERE nip = $guru");
-$data = mysqli_fetch_array($ambil_guru);
 
-// Pastikan parameter NISN tersedia
-if (!isset($_GET['nisn'])) {
-    echo "<script>alert('Parameter NISN tidak ditemukan.'); window.location='inputnilai-guru.php';</script>";
+// Memastikan parameter NISN dan kode_mapel_guru tersedia
+if (!isset($_GET['nisn']) || !isset($_GET['kode_mapel_guru'])) {
+    echo "<script>alert('Parameter tidak lengkap.'); window.location='inputnilai-guru.php';</script>";
     exit();
 }
 
 $nisn = mysqli_real_escape_string($conn, $_GET['nisn']);
+$kode_mapel_guru = mysqli_real_escape_string($conn, $_GET['kode_mapel_guru']);
 
-// Query untuk mengambil data siswa berdasarkan NISN
+// Validasi guru dan mata pelajaran
+$query_validasi = "SELECT * FROM mata_pelajaran WHERE nip = '$guru' AND kode_mapel_guru = '$kode_mapel_guru'";
+$result_validasi = mysqli_query($conn, $query_validasi);
+if (mysqli_num_rows($result_validasi) === 0) {
+    echo "<script>alert('Anda tidak mengampu mata pelajaran ini.'); window.location='inputnilai-guru.php';</script>";
+    exit();
+}
+
+// Query untuk mengambil data siswa dan nilai
 $query_siswa = "SELECT * FROM siswa WHERE nisn = '$nisn'";
 $result_siswa = mysqli_query($conn, $query_siswa);
 
-// Pastikan siswa dengan NISN tersebut ada
 if (mysqli_num_rows($result_siswa) === 0) {
     echo "<script>alert('Siswa dengan NISN tersebut tidak ditemukan.'); window.location='inputnilai-guru.php';</script>";
     exit();
@@ -28,14 +34,13 @@ if (mysqli_num_rows($result_siswa) === 0) {
 
 $data_siswa = mysqli_fetch_assoc($result_siswa);
 
-// Query untuk mengambil nilai dari database jika sudah ada
-$query_nilai = "SELECT * FROM nilai WHERE nisn = '$nisn'";
-$result_nilai = mysqli_query($conn, $query_nilai);
-
 // Inisialisasi nilai default
 $nilai_default = ['ph1' => '', 'ph2' => '', 'uts' => '', 'uas' => ''];
 
-// Jika nilai sudah ada, ambil nilai dari database
+// Query untuk mengambil nilai dari database jika sudah ada
+$query_nilai = "SELECT * FROM nilai WHERE nisn = '$nisn' AND kode_mapel_guru = '$kode_mapel_guru'";
+$result_nilai = mysqli_query($conn, $query_nilai);
+
 if (mysqli_num_rows($result_nilai) > 0) {
     $data_nilai = mysqli_fetch_assoc($result_nilai);
     $nilai_default = [
@@ -46,41 +51,30 @@ if (mysqli_num_rows($result_nilai) > 0) {
     ];
 }
 
-// Tambahkan logika untuk menyimpan nilai yang diinput oleh guru
+// Logika untuk menyimpan nilai yang diinput oleh guru
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Ambil nilai-nilai yang diinput
-    $ph1 = $_POST['ph1'];
-    $ph2 = $_POST['ph2'];
-    $uts = $_POST['uts'];
-    $uas = $_POST['uas'];
+    // Mengambil nilai-nilai yang diinput
+    $ph1 = mysqli_real_escape_string($conn, $_POST['ph1']);
+    $ph2 = mysqli_real_escape_string($conn, $_POST['ph2']);
+    $uts = mysqli_real_escape_string($conn, $_POST['uts']);
+    $uas = mysqli_real_escape_string($conn, $_POST['uas']);
 
-    // Lakukan validasi input nilai jika diperlukan
+    // Validasi nilai input
 
     // Query untuk menyimpan atau mengupdate nilai ke database
     if (mysqli_num_rows($result_nilai) > 0) {
-        // Jika nilai sudah ada, lakukan update
-        $query_update_nilai = "UPDATE nilai SET ph1='$ph1', ph2='$ph2', uts='$uts', uas='$uas' WHERE nisn='$nisn'";
-        $result_update_nilai = mysqli_query($conn, $query_update_nilai);
-
-        if ($result_update_nilai) {
-            echo "<script>alert('Nilai berhasil diupdate.'); window.location='inputnilai-guru.php?kelas=" . $data_siswa['kode_kelas'] . "';</script>";
-            exit();
-        } else {
-            echo "<script>alert('Gagal mengupdate nilai.'); window.location='inputnilai-guru.php?kelas=" . $data_siswa['kode_kelas'] . "';</script>";
-            exit();
-        }
+        $query_update_nilai = "UPDATE nilai SET ph1='$ph1', ph2='$ph2', uts='$uts', uas='$uas' WHERE nisn='$nisn' AND kode_mapel_guru='$kode_mapel_guru'";
     } else {
-        // Jika belum ada, lakukan insert
-        $query_input_nilai = "INSERT INTO nilai (nisn, ph1, ph2, uts, uas) VALUES ('$nisn', '$ph1', '$ph2', '$uts', '$uas')";
-        $result_input_nilai = mysqli_query($conn, $query_input_nilai);
+        $query_update_nilai = "INSERT INTO nilai (nisn, kode_mapel_guru, ph1, ph2, uts, uas) VALUES ('$nisn', '$kode_mapel_guru', '$ph1', '$ph2', '$uts', '$uas')";
+    }
+    $result_update_nilai = mysqli_query($conn, $query_update_nilai);
 
-        if ($result_input_nilai) {
-            echo "<script>alert('Nilai berhasil diinput.'); window.location='inputnilai-guru.php?kelas=" . $data_siswa['kode_kelas'] . "';</script>";
-            exit();
-        } else {
-            echo "<script>alert('Gagal menyimpan nilai.'); window.location='inputnilai-guru.php?kelas=" . $data_siswa['kode_kelas'] . "';</script>";
-            exit();
-        }
+    if ($result_update_nilai) {
+        echo "<script>alert('Nilai berhasil disimpan.'); window.location='inputnilai-guru.php?kelas=" . $data_siswa['kode_kelas'] . "';</script>";
+        exit();
+    } else {
+        echo "<script>alert('Gagal menyimpan nilai.'); window.location='inputnilai-guru.php?kelas=" . $data_siswa['kode_kelas'] . "';</script>";
+        exit();
     }
 }
 ?>

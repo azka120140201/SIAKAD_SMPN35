@@ -7,6 +7,15 @@ if (!isset($_SESSION["siswa"])) {
 $siswa = $_SESSION["siswa"]["nisn"];
 $ambil_siswa = mysqli_query($conn, "SELECT * FROM siswa WHERE nisn = $siswa");
 $data = mysqli_fetch_array($ambil_siswa);
+
+$nama_max_length = 50;
+$tempat_lahir_max_length = 30;
+$email_max_length = 30;
+$no_hp_max_length = 15;
+$alamat_max_length = 100;
+$nama_wali_max_length = 50;
+$no_telepon_wali_max_length = 15;
+$angkatan_max_length = 5;
 ?>
 <!DOCTYPE html>
 <html>
@@ -66,7 +75,7 @@ $data = mysqli_fetch_array($ambil_siswa);
                     </div>
                     <div class="form-group">
                         <label for="kelas">Kelas :</label>
-                        <input type="text" name="kode_kelas" value="<?php echo $data['kode_kelas'] ?>" />
+                        <input type="text" name="kode_kelas" value="<?php echo $data['kode_kelas'] ?>" readonly/>
                     </div>
                     <div class="form-group">
                         <label for="tempat-lahir">Tempat Lahir :</label>
@@ -100,7 +109,14 @@ $data = mysqli_fetch_array($ambil_siswa);
                     </div>
                     <div class="form-group">
                         <label for="agama">Agama :</label>
-                        <input type="text" name="agama" value="<?php echo $data['agama'] ?>" />
+                        <select name="agama" id="agama">
+                            <option value="Islam" <?php if($data['islam'] == 'Islam') echo 'selected'; ?>>Islam</option>
+                            <option value="Kristen" <?php if($data['agama'] == 'Kristen') echo 'selected'; ?>>Kristen</option>
+                            <option value="Katholik" <?php if($data['agama'] == 'Katholik') echo 'selected'; ?>>Katholik</option>
+                            <option value="Hindu" <?php if($data['agama'] == 'Hindu') echo 'selected'; ?>>Hindu</option>
+                            <option value="Budha" <?php if($data['agama'] == 'Budha') echo 'selected'; ?>>Budha</option>
+                            <option value="Kong Hu Chu" <?php if($data['agama'] == 'Kong Hu Chu') echo 'selected'; ?>>Kong Hu Chu</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="nama-wali">Nama Wali :</label>
@@ -138,7 +154,35 @@ $data = mysqli_fetch_array($ambil_siswa);
             $nama_wali = $_POST['nama_wali'];
             $no_telepon_wali = $_POST['no_telepon_wali'];
             $alamat = $_POST['alamat'];
-
+            
+            $error_message = "";
+            if (strlen($nama) > $nama_max_length) {
+                $error_message .= "Panjang Nama tidak boleh lebih dari $nama_max_length karakter.\\n";
+            }
+            if (strlen($tempat_lahir) > $tempat_lahir_max_length) {
+                $error_message .= "Panjang Tempat Lahir tidak boleh lebih dari $tempat_lahir_max_length karakter.\\n";
+            }
+            if (strlen($email) > $email_max_length) {
+                $error_message .= "Panjang Email tidak boleh lebih dari $email_max_length karakter.\\n";
+            }
+            if (strlen($no_hp) > $no_hp_max_length) {
+                $error_message .= "Panjang No HP tidak boleh lebih dari $no_hp_max_length karakter.\\n";
+            }
+            if (strlen($alamat) > $alamat_max_length) {
+                $error_message .= "Panjang Alamat tidak boleh lebih dari $alamat_max_length karakter.\\n";
+            }
+            if (strlen($nama_wali) > $nama_wali_max_length) {
+                $error_message .= "Panjang Nama Wali tidak boleh lebih dari $nama_wali_max_length karakter.\\n";
+            }
+            if (strlen($no_telepon_wali) > $no_telepon_wali_max_length) {
+                $error_message .= "Panjang No Telepon Wali tidak boleh lebih dari $no_telepon_wali_max_length karakter.\\n";
+            }
+            if (strlen($angkatan) > $angkatan_max_length) {
+                $error_message .= "Panjang Angkatan tidak boleh lebih dari $angkatan_max_length karakter.\\n";
+            }
+            if ($error_message) {
+                echo "<script>alert('$error_message');</script>";
+            } else {
             $filename1 = $_FILES['foto']['name'];
             $tmp_name1 = $_FILES['foto']['tmp_name'];
             $ukuran1 = $_FILES['foto']['size'];
@@ -149,7 +193,7 @@ $data = mysqli_fetch_array($ambil_siswa);
 
             $dest = "image/" . $_FILES['foto']['name'];
             move_uploaded_file($tmp_name1, './image/' . $newname1);
-
+            
             $update = mysqli_query($conn, "UPDATE siswa SET 
                 nama = '$nama',
                 nisn = '$nisn',
@@ -170,12 +214,13 @@ $data = mysqli_fetch_array($ambil_siswa);
                 echo
                 '<script>
                   window.location="profile-siswa.php";
-                  alert("data berhasil di update");
+                  alert("Data berhasil diupdate");
                   </script>';
             } else {
                 echo 'gagal ' . mysqli_error($conn);
             }
         }
+    }
         ?>
     </div>
 

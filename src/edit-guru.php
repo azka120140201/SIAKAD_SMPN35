@@ -7,6 +7,12 @@ if (!isset($_SESSION["guru"])) {
 $guru = $_SESSION["guru"]["nip"];
 $ambil_guru = mysqli_query($conn, "SELECT * FROM guru WHERE nip = $guru");
 $data = mysqli_fetch_array($ambil_guru);
+
+$nama_max_length = 50;
+$tempat_lahir_max_length = 30;
+$email_max_length = 30;
+$no_hp_max_length = 15;
+$alamat_max_length = 100;
 ?>
 <!DOCTYPE html>
 <html>
@@ -92,7 +98,14 @@ $data = mysqli_fetch_array($ambil_guru);
                     </div>
                     <div class="form-group">
                         <label for="agama">Agama :</label>
-                        <input type="text" name="agama" value="<?php echo $data['agama'] ?>" />
+                        <select name="agama" id="agama">
+                            <option value="Islam" <?php if($data['islam'] == 'Islam') echo 'selected'; ?>>Islam</option>
+                            <option value="Kristen" <?php if($data['agama'] == 'Kristen') echo 'selected'; ?>>Kristen</option>
+                            <option value="Katholik" <?php if($data['agama'] == 'Katholik') echo 'selected'; ?>>Katholik</option>
+                            <option value="Hindu" <?php if($data['agama'] == 'Hindu') echo 'selected'; ?>>Hindu</option>
+                            <option value="Budha" <?php if($data['agama'] == 'Budha') echo 'selected'; ?>>Budha</option>
+                            <option value="Kong Hu Chu" <?php if($data['agama'] == 'Kong Hu Chu') echo 'selected'; ?>>Kong Hu Chu</option>
+                        </select>
                     </div>
                     <div class="form-group" style="border-bottom: none">
                         <label for="alamat">Alamat</label>
@@ -118,7 +131,26 @@ $data = mysqli_fetch_array($ambil_guru);
             $jenis_kelamin = $_POST['jenis_kelamin'];
             $agama = $_POST['agama'];
             $alamat = $_POST['alamat'];
-
+            
+            $error_message = "";
+            if (strlen($nama) > $nama_max_length) {
+                $error_message .= "Panjang Nama tidak boleh lebih dari $nama_max_length karakter.\\n";
+            }
+            if (strlen($tempat_lahir) > $tempat_lahir_max_length) {
+                $error_message .= "Panjang Tempat Lahir tidak boleh lebih dari $tempat_lahir_max_length karakter.\\n";
+            }
+            if (strlen($email) > $email_max_length) {
+                $error_message .= "Panjang Email tidak boleh lebih dari $email_max_length karakter.\\n";
+            }
+            if (strlen($no_hp) > $no_hp_max_length) {
+                $error_message .= "Panjang No HP tidak boleh lebih dari $no_hp_max_length karakter.\\n";
+            }
+            if (strlen($alamat) > $alamat_max_length) {
+                $error_message .= "Panjang Alamat tidak boleh lebih dari $alamat_max_length karakter.\\n";
+            }
+            if ($error_message) {
+                echo "<script>alert('$error_message');</script>";
+            } else {
             $filename1 = $_FILES['foto']['name'];
             $tmp_name1 = $_FILES['foto']['tmp_name'];
             $ukuran1 = $_FILES['foto']['size'];
@@ -152,6 +184,7 @@ $data = mysqli_fetch_array($ambil_guru);
                 echo 'gagal ' . mysqli_error($conn);
             }
         }
+    }
         ?>
     </div>
 
