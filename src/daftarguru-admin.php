@@ -1,7 +1,6 @@
 <?php
 session_start();
-require('db.php'); // Menggunakan file koneksi db.php
-
+require('db.php');
 if (!isset($_SESSION["admin"])) {
   echo "<script>location='login.php'</script>";
 }
@@ -9,9 +8,9 @@ $admin = $_SESSION["admin"]["nip"];
 $ambil_admin = mysqli_query($conn, "SELECT * FROM admin WHERE nip = '$admin'");
 $data = mysqli_fetch_array($ambil_admin);
 
-// Query untuk mengambil semua kelas
-$query_kelas = "SELECT * FROM kelas";
-$kelas_result = mysqli_query($conn, $query_kelas);
+// Query untuk mengambil semua Mata Pelajaran
+$query_mata_pelajaran = "SELECT * FROM mata_pelajaran";
+$mata_pelajaran_result = mysqli_query($conn, $query_mata_pelajaran);
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +60,7 @@ $kelas_result = mysqli_query($conn, $query_kelas);
           >
         </li>
         <li>
-          <a href="daftarguru-admin.php"
+          <a href="daftarguru-admin.php" class="active"
             ><img src="../assets/person-rays.svg" alt="Daftar-Guru" />Daftar Guru</a
           >
         </li>
@@ -71,7 +70,7 @@ $kelas_result = mysqli_query($conn, $query_kelas);
           >
         </li>
         <li>
-          <a href="datanilai-admin.php" class="active"
+          <a href="datanilai-admin.php"
             ><img src="../assets/transcript.svg" alt="Data-Nilai" />Data Nilai</a
           >
         </li>
@@ -81,40 +80,42 @@ $kelas_result = mysqli_query($conn, $query_kelas);
         </li>
       </ul>
     </nav>
+      <!-- /sidebar -->
 
+      <!-- content -->
     <div class="kotak-isi">
         <!-- Bagian Dropdown Kelas -->
         <div class="d-flex justify-content-between mb-3">
             <div class="text-start">
-                <p class="fw-bold">Data Siswa</p>
+                <p class="fw-bold">Data Guru</p>
             </div>
             <div class="text-end">
-                <select class="form-select border-dark" id="kelasselect" name="kode_kelas" onchange="fetchDataSiswa(this.value)">
-                    <option selected disabled>Pilih Kelas</option>
+                <select class="form-select border-dark" id="mata_pelajaranselect" name="kode_mapel" onchange="fetchDataGuru(this.value)">
+                    <option selected disabled>Pilih Mata Pelajaran</option>
                     <?php 
-                    while($kelas = mysqli_fetch_assoc($kelas_result)): ?>
-                        <option value="<?php echo $kelas['kode_kelas']; ?>"><?php echo $kelas['nama_kelas']; ?></option>
+                    while($mata_pelajaran = mysqli_fetch_assoc($mata_pelajaran_result)): ?>
+                        <option value="<?php echo $mata_pelajaran['kode_mapel']; ?>"><?php echo $mata_pelajaran['nama_mapel']; ?></option>
                     <?php endwhile; ?>
                 </select>
             </div>
         </div>
 
-        <!-- Bagian Tabel Siswa -->
-        <div class="container" id="dataSiswa">
-            <!-- Data siswa akan dimuat di sini -->
+        <!-- Bagian Tabel Guru -->
+        <div class="container" id="dataGuru">
+            <!-- Data guru akan dimuat di sini -->
         </div>
     </div>
         <!-- /dropdown kelas -->
 
     <script>
-    function fetchDataSiswa(kodeKelas) {
+    function fetchDataGuru(kodeMapel) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("dataSiswa").innerHTML = this.responseText;
+                document.getElementById("dataGuru").innerHTML = this.responseText;
             }
         };
-        xhttp.open("GET", "fetchDataSiswa.php?kode_kelas=" + kodeKelas, true);
+        xhttp.open("GET", "fetchDataGuru.php?kode_mapel=" + kodeMapel, true);
         xhttp.send();
     }
     </script>

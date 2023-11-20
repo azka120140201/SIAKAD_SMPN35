@@ -7,6 +7,11 @@ if (!isset($_SESSION["siswa"])) {
 $siswa = $_SESSION["siswa"]["nisn"];
 $ambil_siswa = mysqli_query($conn, "SELECT * FROM siswa WHERE nisn = $siswa");
 $data = mysqli_fetch_array($ambil_siswa);
+
+// Query untuk mendapatkan mata pelajaran berdasarkan jadwal pelajaran siswa
+$kode_kelas_siswa = $data['kode_kelas'];
+$query_mapel = "SELECT DISTINCT jadwal_pelajaran.kode_mapel, mata_pelajaran.nama_mapel FROM jadwal_pelajaran JOIN mata_pelajaran ON jadwal_pelajaran.kode_mapel = mata_pelajaran.kode_mapel WHERE jadwal_pelajaran.kode_kelas = '$kode_kelas_siswa' AND mata_pelajaran.aktif='Ya'";
+$hasil_mapel = mysqli_query($conn, $query_mapel);
 ?>
 
 <!DOCTYPE html>
@@ -90,35 +95,61 @@ $data = mysqli_fetch_array($ambil_siswa);
             </div>
             <!-- Dropdown di sebelah kanan -->
             <div class="text-end">
-                <select class="form-select border-dark"  id="mataPelajaranSelect" name="mata_pelajaran">
-                    <option selected disabled>Mata Pelajaran</option>
-                    <option value="IPA">IPA</option>
-                    <option value="IPS">IPS</option>
-                    <option value="MTK">MTK</option>
-                </select>
+                <select class="form-select border-dark" id="mataPelajaranSelect" name="mata_pelajaran" onchange="tampilkanModul(this.value);">
+    <option selected disabled>Pilih Mata Pelajaran</option>
+    <?php while($mapel = mysqli_fetch_assoc($hasil_mapel)): ?>
+        <option value="<?php echo $mapel['kode_mapel']; ?>"><?php echo $mapel['nama_mapel']; ?></option>
+    <?php endwhile; ?>
+</select>
             </div>
         </div>
         <!-- /button pilih mata pelajaran -->
         <!-- list item table -->
-        <div class="container p-3">
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <div class="row">
-                            <td class="col-lg-11" scope="row"><a href="">Modul 1</a></td>
-                        </div>
-                    </tr>
-                    <tr>
-                        <div class="row">
-                            <td class="col-lg-11" scope="row"><a href="">Modul 2</a></td>
-                        </div>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <div class="container">
+      <table class="table table-striped table-fixed text-center">
+          <thead style="background-color: #C6D8AF;">
+            <tr>
+                <th>Nama Modul</th>
+                <th>Tanggal Upload</th>
+                <th>Link Akses</th>
+            </tr>
+        </thead>
+        <tbody id="daftarModul">
+            <!-- Daftar modul akan dimuat di sini -->
+        </tbody>
+    </table>
+</div>
         <!-- /list item table -->
     </div>
     <!-- /container -->
+    
+    <script>
+document.getElementById('mataPelajaranSelect').addEventListener('change', function() {
+    var kodeMapel = this.value;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'getModul.php?kode_mapel=' + kodeMapel, true);
+    xhr.onload = function() {
+        if (this.status == 200) {
+            var data = JSON.parse(this.responseText);
+            var html = '';
+            data.forEach(function(modul) {
+                html += '<tr>';
+                html += '<td>' + modul.nama_modul + '</td>';
+                html += '<td>' + modul.tanggal_upload + '</td>';
+                html += '<td><a href="#" onclick="previewModul(\'' + modul.file_url + '\')">Preview</a></td>';
+                html += '</tr>';
+            });
+            document.getElementById('daftarModul').innerHTML = html;
+        }
+    }
+    xhr.send();
+});
+
+function previewModul(fileUrl) {
+    window.open(fileUrl, '_blank'); // Membuka modul dalam tab baru
+}
+</script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 

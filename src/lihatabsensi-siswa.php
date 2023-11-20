@@ -8,12 +8,9 @@ $siswa = $_SESSION["siswa"]["nisn"];
 $ambil_siswa = mysqli_query($conn, "SELECT * FROM siswa WHERE nisn = $siswa");
 $data = mysqli_fetch_array($ambil_siswa);
 
-$query_nilai_rata = "SELECT AVG((ph1 * 0.2 + ph2 * 0.2 + uts * 0.3 + uas * 0.3)) AS nilai_rata_rata 
-                     FROM nilai 
-                     WHERE nisn = '$siswa'";
-$result_nilai_rata = mysqli_query($conn, $query_nilai_rata);
-$data_nilai_rata = mysqli_fetch_assoc($result_nilai_rata);
-$nilai_rata_rata = number_format($data_nilai_rata['nilai_rata_rata'], 2);
+$kode_kelas_siswa = $data['kode_kelas'];
+$query_mapel = "SELECT DISTINCT jadwal_pelajaran.kode_mapel, mata_pelajaran.nama_mapel FROM jadwal_pelajaran JOIN mata_pelajaran ON jadwal_pelajaran.kode_mapel = mata_pelajaran.kode_mapel WHERE jadwal_pelajaran.kode_kelas = '$kode_kelas_siswa' AND mata_pelajaran.aktif='Ya'";
+$hasil_mapel = mysqli_query($conn, $query_mapel);
 ?>
 
 <!DOCTYPE html>
@@ -93,66 +90,55 @@ $nilai_rata_rata = number_format($data_nilai_rata['nilai_rata_rata'], 2);
     <div class="kotak-isi">
         <!-- dropdown mapel -->
         <div class="dropdown container ml-3 mb-3">
-                <button class="btn border-dark dropdown-toggle" style="background-color: #C6D8AF;" type="button"
-                    id="mapel" data-bs-toggle="dropdown" aria-expanded="false">
-                    Mata Pelajaran
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="mapel">
-                    <li class="dropdown-item" href="#">mapel 1</li>
-                    <li class="dropdown-item" href="#">mapel 2</li>
-                    <li class="dropdown-item" href="#">mapel 3</li>
-                </ul>
-            </div>
+    <button class="btn border-dark dropdown-toggle" style="background-color: #C6D8AF;" type="button"
+        id="mapel" data-bs-toggle="dropdown" aria-expanded="false">
+        Mata Pelajaran
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="mapel">
+        <?php while($mapel = mysqli_fetch_assoc($hasil_mapel)): ?>
+            <li class="dropdown-item" onclick="showAbsensi('<?php echo $mapel['kode_mapel']; ?>')"><?php echo $mapel['nama_mapel']; ?></li>
+        <?php endwhile; ?>
+    </ul>
+</div>
         <!-- /dropdown mapel -->
 
         <!-- Table -->
         <div class="container">
-            <table class="table table-striped table-fixed text-center">
-                <thead style="background-color: #C6D8AF;">
-                    <tr>
-                        <th scope="col">Pertemuan</th>
-                        <th scope="col">Keterangan</th>
-                    </tr>
-                </thead>
-                <tbody>
-                        <tr>
-                            <td>Pertemuan 1</td>
-                            <td>Hadir</td>
-                        </tr>
-                        <tr>
-                            <td>Pertemuan 2</td>
-                            <td>Hadir</td>
-                        </tr>
-                        <tr>
-                            <td>Pertemuan 3</td>
-                            <td>Hadir</td>
-                        </tr>
-                        <tr>
-                            <td>Pertemuan 4</td>
-                            <td>Hadir</td>
-                        </tr>
-                        <tr>
-                            <td>Pertemuan 5</td>
-                            <td>Hadir</td>
-                        </tr>
-                        <tr>
-                            <td>Pertemuan 6</td>
-                            <td>Hadir</td>
-                        </tr>
-                        <tr>
-                            <td>Pertemuan 7</td>
-                            <td>Hadir</td>
-                        </tr>
-                        <tr>
-                            <td>Pertemuan 8</td>
-                            <td>Hadir</td>
-                        </tr>
-                </tbody>
-            </table>
-        </div>
+    <table class="table table-striped table-fixed text-center" id="absensiTable">
+        <thead style="background-color: #C6D8AF;">
+            <tr>
+                <th scope="col">Pertemuan</th>
+                <th scope="col">Keterangan</th>
+                <th scope="col">Tanggal</th>
+                <th scope="col">Waktu Absensi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Absensi akan dimuat di sini -->
+        </tbody>
+    </table>
+</div>
         <!-- /table -->
     </div>
     <!-- /container -->
+    
+    <script>
+function showAbsensi(kodeMapel) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'getAbsensi.php?kode_mapel=' + kodeMapel, true);
+    xhr.onload = function() {
+        if (this.status == 200) {
+            // Hanya update <tbody> dari tabel
+            document.getElementById('absensiTable').getElementsByTagName('tbody')[0].innerHTML = this.responseText;
+        }
+    }
+    xhr.send();
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

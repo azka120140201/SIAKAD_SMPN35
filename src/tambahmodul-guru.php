@@ -7,6 +7,11 @@ if (!isset($_SESSION["guru"])) {
 $guru = $_SESSION["guru"]["nip"];
 $ambil_guru = mysqli_query($conn, "SELECT * FROM guru WHERE nip = '$guru'");
 $data = mysqli_fetch_array($ambil_guru);
+
+$nip_guru = $data['nip'];
+$query_mapel = "SELECT * FROM mata_pelajaran WHERE nip = '$nip_guru' AND aktif='Ya'";
+$hasil_mapel = mysqli_query($conn, $query_mapel);
+$mata_pelajaran = mysqli_fetch_all($hasil_mapel, MYSQLI_ASSOC);
 ?>
 
 <!doctype html>
@@ -96,10 +101,10 @@ $data = mysqli_fetch_array($ambil_guru);
                     <div class="form-group">
                         <label for="mata_pelajaran">Mata Pelajaran:</label>
                         <select name="mata_pelajaran" required>
-                            <?php foreach ($mata_pelajaran as $mapel) : ?>
-                                <option value="<?php echo $mapel['id']; ?>"><?php echo $mapel['nama']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
+    <?php foreach ($mata_pelajaran as $mapel) : ?>
+        <option value="<?php echo $mapel['kode_mapel']; ?>"><?php echo $mapel['nama_mapel']; ?></option>
+    <?php endforeach; ?>
+</select>
                     </div>
                     <div class="form-group">
                         <label for="file_modul">Upload File Modul:</label>
@@ -116,37 +121,32 @@ $data = mysqli_fetch_array($ambil_guru);
         <div class="" style="position:absolute; z-index:999">
             <?php
             if (isset($_POST['submit'])) {
-                $nama_modul = $_POST['nama_modul'];
-                $id_mata_pelajaran = $_POST['mata_pelajaran'];
+    $nama_modul = $_POST['nama_modul'];
+    $kode_mapel = $_POST['mata_pelajaran'];
 
-                // Upload file modul
-                $filename_modul = $_FILES['file_modul']['name'];
-                $tmp_name_modul = $_FILES['file_modul']['tmp_name'];
-                $ukuran_modul = $_FILES['file_modul']['size'];
-                $type_modul = explode('.', $filename_modul);
-                $type_modul = end($type_modul);
-                $newname_modul = time() . '.' . $type_modul;
-                $tipe_diizinkan = array('pdf', 'doc', 'docx', 'ppt', 'pptx');
+    // Proses upload file modul
+    if(isset($_FILES['file_modul']) && $_FILES['file_modul']['error'] == 0){
+        $filename_modul = $_FILES['file_modul']['name'];
+        $tmp_name_modul = $_FILES['file_modul']['tmp_name'];
+        $type_modul = pathinfo($filename_modul, PATHINFO_EXTENSION);
+        $newname_modul = time() . '.' . $type_modul;
+        $tipe_diizinkan = array('pdf', 'doc', 'docx', 'ppt', 'pptx');
 
-                if (in_array($type_modul, $tipe_diizinkan)) {
-                    $dest_modul = "modul/" . $newname_modul;
-                    move_uploaded_file($tmp_name_modul, './modul/' . $newname_modul);
+        if (in_array($type_modul, $tipe_diizinkan)) {
+            move_uploaded_file($tmp_name_modul, './modul/' . $newname_modul);
+            $query_insert = "INSERT INTO modul (nama_file, kode_mapel, file_upload, tanggal_upload) VALUES ('$nama_modul', '$kode_mapel', '$newname_modul', NOW())";
+            $insert_modul = mysqli_query($conn, $query_insert);
 
-                    $insert_modul = mysqli_query($conn, "INSERT INTO modul (nama_modul, id_mata_pelajaran, file_modul) VALUES ('$nama_modul', '$id_mata_pelajaran', '$newname_modul')");
-
-                    if ($insert_modul) {
-                        echo
-                        '<script>
-                    window.location="listmodul-guru.php";
-                    alert("Modul berhasil ditambahkan");
-                    </script>';
-                    } else {
-                        echo 'gagal ' . mysqli_error($conn);
-                    }
-                } else {
-                    echo '<script>alert("Format file tidak diizinkan. Hanya file PDF, DOC, DOCX, PPT, dan PPTX yang diizinkan.");</script>';
-                }
+            if ($insert_modul) {
+                echo '<script>alert("Modul berhasil ditambahkan"); window.location="listmodul-guru.php";</script>';
+            } else {
+                echo 'Gagal: ' . mysqli_error($conn);
             }
+        } else {
+            echo '<script>alert("Format file tidak diizinkan. Hanya file PDF, DOC, DOCX, PPT, dan PPTX yang diizinkan.");</script>';
+        }
+    }
+}
             ?>
         </div>
     </div>

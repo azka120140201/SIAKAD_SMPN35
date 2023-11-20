@@ -66,12 +66,12 @@ $kelas_result = mysqli_query($conn, $query_kelas);
           >
         </li>
         <li>
-          <a href="daftarsiswa-admin.php"
+          <a href="daftarsiswa-admin.php" class="active"
             ><img src="../assets/person-group.svg" alt="Daftar-Siswa" />Daftar Siswa</a
           >
         </li>
         <li>
-          <a href="datanilai-admin.php" class="active"
+          <a href="datanilai-admin.php"
             ><img src="../assets/transcript.svg" alt="Data-Nilai" />Data Nilai</a
           >
         </li>
@@ -89,7 +89,7 @@ $kelas_result = mysqli_query($conn, $query_kelas);
                 <p class="fw-bold">Data Siswa</p>
             </div>
             <div class="text-end">
-                <select class="form-select border-dark" id="kelasselect" name="kode_kelas" onchange="fetchDataSiswa(this.value)">
+                <select class="form-select border-dark" id="kelasselect" name="kode_kelas" onchange="fetchDataListSiswa(this.value)">
                     <option selected disabled>Pilih Kelas</option>
                     <?php 
                     while($kelas = mysqli_fetch_assoc($kelas_result)): ?>
@@ -107,14 +107,14 @@ $kelas_result = mysqli_query($conn, $query_kelas);
         <!-- /dropdown kelas -->
 
     <script>
-    function fetchDataSiswa(kodeKelas) {
+    function fetchDataListSiswa(kodeKelas) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 document.getElementById("dataSiswa").innerHTML = this.responseText;
             }
         };
-        xhttp.open("GET", "fetchDataSiswa.php?kode_kelas=" + kodeKelas, true);
+        xhttp.open("GET", "fetchDataListSiswa.php?kode_kelas=" + kodeKelas, true);
         xhttp.send();
     }
     </script>

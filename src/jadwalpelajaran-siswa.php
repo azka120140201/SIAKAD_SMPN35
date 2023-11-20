@@ -87,7 +87,7 @@ foreach ($jadwal_pelajaran as $hari => $mapels) {
             >
           </li>
           <li>
-            <a href="jadwalpelajaran-siswa.php"
+            <a href="lihatabsensi-siswa.php"
               ><img src="../assets/person-rays.svg" alt="Absensi" />Absensi</a
             >
           </li>

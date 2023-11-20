@@ -1,28 +1,66 @@
 <?php
 session_start();
 require('db.php');
+
+// Cek login guru
 if (!isset($_SESSION["guru"])) {
     echo "<script>location='login.php'</script>";
+    exit;
 }
+
 $guru = $_SESSION["guru"]["nip"];
 $ambil_guru = mysqli_query($conn, "SELECT * FROM guru WHERE nip = '$guru'");
 $data = mysqli_fetch_array($ambil_guru);
 
-// Menghitung jumlah kelas yang diampu
-$query_jumlah_kelas = "SELECT COUNT(DISTINCT kode_kelas) AS jumlah_kelas FROM jadwal_pelajaran WHERE nip = '$guru'";
-$result_jumlah_kelas = mysqli_query($conn, $query_jumlah_kelas);
-$data_jumlah_kelas = mysqli_fetch_assoc($result_jumlah_kelas);
-$jumlah_kelas = $data_jumlah_kelas['jumlah_kelas'];
+// Mengambil daftar kelas yang diampu
+$query_kelas = "SELECT DISTINCT k.kode_kelas FROM kelas k JOIN jadwal_pelajaran jp ON k.kode_kelas = jp.kode_kelas JOIN mata_pelajaran mp ON jp.kode_mapel = mp.kode_mapel WHERE mp.nip = '$guru'";
+$hasil_kelas = mysqli_query($conn, $query_kelas);
 
-// Menghitung jumlah siswa di kelas yang diampu
-$query_jumlah_siswa = "SELECT COUNT(DISTINCT siswa.id_siswa) AS jumlah_siswa 
-                       FROM siswa 
-                       JOIN jadwal_pelajaran ON siswa.kode_kelas = jadwal_pelajaran.kode_kelas
-                       JOIN mata_pelajaran ON jadwal_pelajaran.kode_mapel = mata_pelajaran.kode_mapel
-                       WHERE mata_pelajaran.nip = '$guru'";
-$result_jumlah_siswa = mysqli_query($conn, $query_jumlah_siswa);
-$data_jumlah_siswa = mysqli_fetch_assoc($result_jumlah_siswa);
-$jumlah_siswa = $data_jumlah_siswa['jumlah_siswa'];
+$kelas_guru = [];
+while ($kelas = mysqli_fetch_assoc($hasil_kelas)) {
+    $kelas_guru[] = $kelas['kode_kelas'];
+}
+
+// Menangani pemilihan kelas dan pertemuan
+$kelas_dipilih = $_GET['kelas'] ?? '';
+$pertemuan_ke = $_GET['pertemuan_ke'] ?? '';
+$daftar_siswa = [];
+
+// Periksa apakah kelas dan pertemuan sudah dipilih
+if ($kelas_dipilih && $pertemuan_ke) {
+    $query_siswa = "SELECT s.nama, s.nisn FROM siswa s WHERE s.kode_kelas = '$kelas_dipilih'";
+    $hasil_siswa = mysqli_query($conn, $query_siswa);
+
+    while ($row = mysqli_fetch_assoc($hasil_siswa)) {
+        $daftar_siswa[] = $row;
+    }
+}
+
+// Menangani penyimpanan data absensi
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $kelas_dipilih = mysqli_real_escape_string($conn, $_POST['kelas']);
+    $pertemuan_ke = mysqli_real_escape_string($conn, $_POST['pertemuan_ke']);
+
+    // Mendapatkan id_jadwal dan kode_mapel
+    $query_jadwal = "SELECT id_jadwal, kode_mapel FROM jadwal_pelajaran WHERE nip = '$guru' AND kode_kelas = '$kelas_dipilih' LIMIT 1";
+    $hasil_jadwal = mysqli_query($conn, $query_jadwal);
+    $data_jadwal = mysqli_fetch_assoc($hasil_jadwal);
+
+    $id_jadwal = $data_jadwal['id_jadwal'];
+    $kode_mapel = $data_jadwal['kode_mapel'];
+
+    foreach ($_POST['absensi'] as $nisn => $keterangan) {
+        $nisn = mysqli_real_escape_string($conn, $nisn);
+        $keterangan = mysqli_real_escape_string($conn, $keterangan);
+
+        // Simpan data absensi ke database
+        $query_simpan = "INSERT INTO absensi (id_jadwal, pertemuan_ke, kode_mapel, nisn, keterangan, tanggal, waktu_input)
+                 VALUES ('$id_jadwal', '$pertemuan_ke', '$kode_mapel', '$nisn', '$keterangan', CURDATE(), NOW())";
+        mysqli_query($conn, $query_simpan);
+    }
+    echo "<script>alert('Absensi berhasil disimpan!'); location='inputabsensi-guru.php?kelas=$kelas_dipilih&pertemuan_ke=$pertemuan_ke';</script>";
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -114,12 +152,14 @@ $jumlah_siswa = $data_jumlah_siswa['jumlah_siswa'];
                     Pilih Kelas
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <?php foreach ($kelas_guru as $kode_kelas): ?>
-                        <li><a class="dropdown-item" href="lihatnilaiakhir-guru.php?kelas=<?php echo $kode_kelas; ?>">
-                                <?php echo $kode_kelas; ?>
-                            </a></li>
-                    <?php endforeach; ?>
-                </ul>
+    <?php foreach ($kelas_guru as $kode_kelas): ?>
+        <li>
+            <a class="dropdown-item" href="inputabsensi-guru.php?kelas=<?php echo $kode_kelas; ?>">
+                <?php echo $kode_kelas; ?>
+            </a>
+        </li>
+    <?php endforeach; ?>
+</ul>
             </div>
             <!-- /button pilih kelas -->
 
@@ -130,153 +170,61 @@ $jumlah_siswa = $data_jumlah_siswa['jumlah_siswa'];
                     Pertemuan
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                    <?php foreach ($kelas_guru as $kode_kelas): ?>
-                        <li><a class="dropdown-item" href="lihatnilaiakhir-guru.php?kelas=<?php echo $kode_kelas; ?>">
-                                <?php echo $kode_kelas; ?>
-                            </a></li>
-                    <?php endforeach; ?>
-                </ul>
+    <?php for ($i = 1; $i <= 10; $i++): ?>
+        <li>
+            <a class="dropdown-item" href="inputabsensi-guru.php?kelas=<?php echo $kelas_dipilih; ?>&pertemuan_ke=<?php echo $i; ?>">
+                Pertemuan <?php echo $i; ?>
+            </a>
+        </li>
+    <?php endfor; ?>
+</ul>
             </div>
             <!-- /button pertemuan -->
         </div>
         <!-- button group -->
 
         <!-- table -->
-        <div class="container p-3">
-            <table class="table">
-                <tbody>
+<?php if ($kelas_dipilih && $pertemuan_ke): ?>
+    <form action="inputabsensi-guru.php" method="post">
+    <input type="hidden" name="kelas" value="<?php echo $kelas_dipilih; ?>">
+    <input type="hidden" name="pertemuan_ke" value="<?php echo $pertemuan_ke; ?>">
+    <form action="inputabsensi-guru.php?kelas=<?php echo $kelas_dipilih; ?>&pertemuan_ke=<?php echo $pertemuan_ke; ?>" method="post">
+            <table class="table table-striped table-fixed text-center">
+        <thead style="background-color: #C6D8AF;">
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Nama Siswa</th>
+                    <th scope="col">Keterangan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $no = 1; foreach ($daftar_siswa as $siswa): ?>
                     <tr>
-                        <div class="row">
-                        <td class="col-lg-11" scope="row">Siswa</td>
-                        <td class="col-lg-1">
-                            <div class="dropdown">
-                                <button class="btn border-dark dropdown-toggle" style="background-color: #C6D8AF;" type="button" id="action"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Alpa
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="action">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </div>
+                        <td><?php echo $no++; ?></td>
+                        <td><?php echo htmlspecialchars($siswa['nama']); ?></td>
+                        <td>
+                            <select name="absensi[<?php echo $siswa['nisn']; ?>]">
+                                <option value="Hadir">Hadir</option>
+                                <option value="Izin">Izin</option>
+                                <option value="Sakit">Sakit</option>
+                                <option value="Alpa">Alpa</option>
+                            </select>
                         </td>
-                        </div>
                     </tr>
-                    <tr>
-                        <div class="row">
-                        <td class="col-lg-11" scope="row">Siswa</td>
-                        <td class="col-lg-1">
-                            <div class="dropdown">
-                                <button class="btn border-dark dropdown-toggle" style="background-color: #C6D8AF;" type="button" id="action"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Alpa
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="action">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        </div>
-                    </tr>
-                    <tr>
-                        <div class="row">
-                        <td class="col-lg-11" scope="row">Siswa</td>
-                        <td class="col-lg-1">
-                            <div class="dropdown">
-                                <button class="btn border-dark dropdown-toggle" style="background-color: #C6D8AF;" type="button" id="action"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Alpa
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="action">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        </div>
-                    </tr>
-                    <tr>
-                        <div class="row">
-                        <td class="col-lg-11" scope="row">Siswa</td>
-                        <td class="col-lg-1">
-                            <div class="dropdown">
-                                <button class="btn border-dark dropdown-toggle" style="background-color: #C6D8AF;" type="button" id="action"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Alpa
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="action">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        </div>
-                    </tr>
-                    <tr>
-                        <div class="row">
-                        <td class="col-lg-11" scope="row">Siswa</td>
-                        <td class="col-lg-1">
-                            <div class="dropdown">
-                                <button class="btn border-dark dropdown-toggle" style="background-color: #C6D8AF;" type="button" id="action"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Alpa
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="action">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        </div>
-                    </tr>
-                    <tr>
-                        <div class="row">
-                        <td class="col-lg-11" scope="row">Siswa</td>
-                        <td class="col-lg-1">
-                            <div class="dropdown">
-                                <button class="btn border-dark dropdown-toggle" style="background-color: #C6D8AF;" type="button" id="action"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Alpa
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="action">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        </div>
-                    </tr>
-                    <tr>
-                        <div class="row">
-                        <td class="col-lg-11" scope="row">Siswa</td>
-                        <td class="col-lg-1">
-                            <div class="dropdown">
-                                <button class="btn border-dark dropdown-toggle" style="background-color: #C6D8AF;" type="button" id="action"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Alpa
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="action">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        </div>
-                    </tr>
-                </tbody>
-            </table>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <div class="edit-profile-buttons">
+        <input type="submit" name="submit" value="Save" id="edit-button">
         </div>
+    </form>
+<?php endif; ?>
         <!-- /table -->
+        
     </div>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
